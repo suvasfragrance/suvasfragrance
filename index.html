@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suvas — A Parampara of Purity</title>
+  <link rel="icon" type="image/png" href="https://z-cdn-media.chatglm.cn/files/446440fc-504f-4109-ba00-5720dc1ed85d.png?auth_key=1884197723-b2ae75c0f6a1447a9461ae9f82d9f91c-0-186d1b22ea4c29dc90d812ece38a787d">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maroon: { 50:'#fdf2f4', 100:'#fce7eb', 200:'#f9d0d9', 300:'#f4a8b8', 400:'#ed7693', 500:'#e04a6f', 600:'#c62a54', 700:'#a31d43', 800:'#8b1a3a', 900:'#6B0F1A', 950:'#3d0811' },
+            gold: { 50:'#fdf9ed', 100:'#f9eece', 200:'#f3dc9a', 300:'#ecca65', 400:'#e0b63e', 500:'#D4A843', 600:'#b8882e', 700:'#966625', 800:'#7a5124', 900:'#654322', 950:'#3a2311' },
+            cream: { 50:'#FFFDF7', 100:'#FFF8E7', 200:'#FFF0CC' }
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Cormorant Garamond', 'serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Cormorant Garamond', serif; }
+    .ornament { display:flex; align-items:center; justify-content:center; gap:12px; }
+    .ornament::before, .ornament::after { content:''; height:1px; width:80px; background:linear-gradient(to right, transparent, #D4A843, transparent); }
+    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+    .gold-shimmer { background: linear-gradient(90deg, #D4A843, #f5e6a3, #D4A843, #b8882e, #D4A843); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    .animate-fade-up { animation: fadeUp 0.8s ease-out forwards; }
+    .reveal { opacity:0; transform:translateY(30px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .ornate-border { border: 2px solid #D4A843; position: relative; }
+    .ornate-border::before { content:''; position:absolute; inset:4px; border:1px solid rgba(212,168,67,0.4); pointer-events:none; border-radius:inherit; }
+    .product-card { transition: all 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .product-card:hover { transform: translateY(-8px); }
+    .product-card:hover .product-img { transform: scale(1.05); }
+    .product-img { transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    ::-webkit-scrollbar { width:8px; }
+    ::-webkit-scrollbar-track { background:#1A0508; }
+    ::-webkit-scrollbar-thumb { background:#D4A843; border-radius:4px; }
+    @keyframes slideIn { from { transform:translateX(100%); opacity:0; } to { transform:translateX(0); opacity:1; } }
+    @keyframes slideOut { from { transform:translateX(0); opacity:1; } to { transform:translateX(100%); opacity:0; } }
+    .toast-in { animation: slideIn 0.4s ease-out forwards; }
+    .toast-out { animation: slideOut 0.4s ease-in forwards; }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-4px; left:50%; width:0; height:2px; background:#D4A843; transition:all 0.3s ease; transform:translateX(-50%); }
+    .nav-link:hover::after, .nav-link.active::after { width:100%; }
+    .video-wrapper { position:relative; padding-bottom:177%; height:0; overflow:hidden; border-radius:12px; }
+    .video-wrapper iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:12px; }
+    .mobile-menu { transform:translateX(100%); transition:transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .mobile-menu.open { transform:translateX(0); }
+    .hero-carousel { position:relative; width:100%; height:100vh; min-height:600px; overflow:hidden; }
+    .hero-slide { position:absolute; inset:0; opacity:0; transition: opacity 1.2s ease-in-out; z-index:0; }
+    .hero-slide.active { opacity:1; z-index:1; }
+    .hero-slide .slide-bg { width:100%; height:100%; object-fit:cover; }
+    .hero-slide .overlay { position:absolute; inset:0; }
+    .hero-slide .slide-title { opacity:0; transform:translateY(35px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s; }
+    .hero-slide.active .slide-title { opacity:1; transform:translateY(0); }
+    .hero-slide .slide-cta { opacity:0; transform:translateY(25px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s; }
+    .hero-slide.active .slide-cta { opacity:1; transform:translateY(0); }
+    .carousel-progress { position:absolute; bottom:0; left:0; height:3px; background:#D4A843; z-index:10; transition:width 0.1s linear; }
+    .hero-dot { width:12px; height:12px; border-radius:50%; border:1.5px solid rgba(212,168,67,0.5); background:transparent; transition:all 0.4s; cursor:pointer; position:relative; }
+    .hero-dot.active { border-color:#D4A843; }
+    .hero-dot.active::after { content:''; position:absolute; inset:3px; border-radius:50%; background:#D4A843; }
+    .modal-overlay { opacity:0; pointer-events:none; transition:opacity 0.4s; }
+    .modal-overlay.open { opacity:1; pointer-events:auto; }
+    .modal-content { transform:scale(0.95) translateY(20px); transition:transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .modal-overlay.open .modal-content { transform:scale(1) translateY(0); }
+    .qty-btn { width:32px; height:32px; border-radius:50%; border:1px solid rgba(212,168,67,0.3); display:flex; align-items:center; justify-content:center; color:#D4A843; transition:all 0.2s; }
+    .qty-btn:hover { background:rgba(212,168,67,0.15); border-color:#D4A843; }
+    .whatsapp-float { animation: pulse-glow 2s infinite; }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); } 50% { box-shadow: 0 0 20px 8px rgba(37,211,102,0.2); } }
+    @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    .marquee-track { animation: marquee 30s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    .product-card .product-bg { background: radial-gradient(ellipse at center, rgba(212,168,67,0.08) 0%, transparent 70%); }
+    .founder-card { transition: all 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .founder-card:hover { transform: translateY(-6px); }
+    .founder-card:hover .founder-img { transform: scale(1.05); }
+    .founder-img { transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+    .float-anim { animation: float 3s ease-in-out infinite; }
+    .tag { transition: all 0.3s ease; }
+    .tag:hover { background: rgba(212,168,67,0.2); transform: translateY(-2px); }
+  </style>
+</head>
+<body class="bg-maroon-950 text-cream-50 overflow-x-hidden">
+
+  <div id="toast-container" class="fixed top-24 right-4 z-[100] flex flex-col gap-3"></div>
+
+  <a href="https://wa.me/919044742251?text=Hi!%20I'm%20interested%20in%20Suvas%20Attars" target="_blank" rel="noopener" class="whatsapp-float fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- TOP INFO BAR -->
+  <div class="bg-maroon-950 border-b border-gold-500/10 relative z-50">
+    <div class="overflow-hidden">
+      <div class="marquee-track flex items-center whitespace-nowrap py-2">
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:leaf"></span>Organic, Alcohol-Free Traditional Indian Attars</span>
+        <span class="text-gold-500/30">✦</span>
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:package"></span>Premium 8ml Crystal Decanter Box Pack Included</span>
+        <span class="text-gold-500/30">✦</span>
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:leaf"></span>Organic, Alcohol-Free Traditional Indian Attars</span>
+        <span class="text-gold-500/30">✦</span>
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:package"></span>Premium 8ml Crystal Decanter Box Pack Included</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="fixed left-0 right-0 z-50 transition-all duration-500" style="top:33px;">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3 group">
+        <img src="https://z-cdn-media.chatglm.cn/files/446440fc-504f-4109-ba00-5720dc1ed85d.png?auth_key=1884197723-b2ae75c0f6a1447a9461ae9f82d9f91c-0-186d1b22ea4c29dc90d812ece38a787d" alt="Suvas Logo" class="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300">
+        <div>
+          <span class="font-display text-xl text-gold-400 tracking-[0.15em] leading-none block">SUVAS</span>
+          <span class="text-[8px] font-sans text-gold-500/50 tracking-[0.3em] uppercase leading-none">A Parampara of Purity</span>
+        </div>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home" class="nav-link text-sm font-sans font-medium text-cream-100/80 hover:text-gold-400 transition-colors">Home</a>
+        <a href="#products" class="nav-link text-sm font-sans font-medium text-cream-100/80 hover:text-gold-400 transition-colors">Shop Fragrance</a>
+        <a href="#contact" class="nav-link text-sm font-sans font-medium text-cream-100/80 hover:text-gold-400 transition-colors">Contact</a>
+      </div>
+      <div class="hidden md:flex items-center gap-3">
+        <a href="https://wa.me/919044742251?text=Hi!%20I%20want%20to%20order%20Suvas%20Attars" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-[#25D366]/20 flex items-center justify-center hover:bg-[#25D366]/30 transition-colors" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="#products" class="inline-flex items-center gap-2 bg-gold-500 text-maroon-950 font-sans text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/25">
+          <span class="iconify w-4 h-4" data-icon="lucide:shopping-bag"></span>Shop Now
+        </a>
+      </div>
+      <button id="menu-toggle" class="md:hidden text-gold-400 p-2" aria-label="Open menu"><span class="iconify w-6 h-6" data-icon="lucide:menu"></span></button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] bg-maroon-950/98 backdrop-blur-lg">
+    <div class="flex items-center justify-between p-6">
+      <img src="https://z-cdn-media.chatglm.cn/files/446440fc-504f-4109-ba00-5720dc1ed85d.png?auth_key=1884197723-b2ae75c0f6a1447a9461ae9f82d9f91c-0-186d1b22ea4c29dc90d812ece38a787d" alt="Suvas" class="w-8 h-8 object-contain">
+      <button id="menu-close" class="text-gold-400 p-2" aria-label="Close menu"><span class="iconify w-7 h-7" data-icon="lucide:x"></span></button>
+    </div>
+    <div class="flex flex-col items-center gap-8 mt-12">
+      <a href="#home" class="mobile-link font-display text-3xl text-cream-100 hover:text-gold-400 transition-colors">Home</a>
+      <a href="#about" class="mobile-link font-display text-3xl text-cream-100 hover:text-gold-400 transition-colors">About</a>
+      <a href="#products" class="mobile-link font-display text-3xl text-cream-100 hover:text-gold-400 transition-colors">Shop Fragrances</a>
+      <a href="#videos" class="mobile-link font-display text-3xl text-cream-100 hover:text-gold-400 transition-colors">Gallery</a>
+      <a href="#contact" class="mobile-link font-display text-3xl text-cream-100 hover:text-gold-400 transition-colors">Contact</a>
+      <a href="https://wa.me/919044742251?text=Hi!%20I%20want%20to%20order%20Suvas%20Attars" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 bg-[#25D366] text-white font-sans font-semibold px-8 py-3 rounded-full">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- HERO CAROUSEL -->
+  <section id="home" class="hero-carousel">
+    <div class="hero-slide active" data-slide="0">
+      <img src="https://z-cdn-media.chatglm.cn/files/3ab1df2e-757f-4803-a789-73d08a606372.png?auth_key=1884203050-779270fb39574e1cb6cc3570d1b32adf-0-90ffdc7c98dd59a315b4e2a6323729a4" alt="Suvas Attars" class="slide-bg">
+      <div class="overlay bg-gradient-to-r from-maroon-950/90 via-maroon-950/60 to-transparent"></div>
+      <div class="absolute inset-0 flex items-center z-10">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+          <div class="max-w-xl">
+            <h2 class="slide-title font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-cream-50 leading-[1.08]">
+              Every drop of attar tells a story.<br><span class="text-gold-400">Wear yours with grace.</span>
+            </h2>
+            <div class="slide-cta mt-9 flex items-center gap-4">
+              <a href="#products" class="inline-flex items-center gap-2 bg-gold-500 text-maroon-950 font-sans font-semibold px-8 py-4 rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/25 hover:scale-105">
+                Shop Fragrances <span class="iconify w-4 h-4" data-icon="lucide:arrow-right"></span>
+              </a>
+              <a href="#about" class="inline-flex items-center gap-2 text-gold-400 font-sans text-sm font-medium hover:text-gold-300 transition-colors group">
+                Our Story <span class="iconify w-4 h-4 group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-slide" data-slide="1">
+      <img src="https://z-cdn-media.chatglm.cn/files/d6234a6b-04c8-4cc8-9ddc-d78b1882e227.png?auth_key=1884203050-a29682abc4784c798bcddc7a63ee1c83-0-9857f1f1c788b5df937cc447bd2f1bf5" alt="Suvas Attars" class="slide-bg">
+      <div class="overlay bg-gradient-to-r from-maroon-950/90 via-maroon-950/60 to-transparent"></div>
+      <div class="absolute inset-0 flex items-center z-10">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+          <div class="max-w-xl">
+            <h2 class="slide-title font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-cream-50 leading-[1.08]">
+              Your signature isn't written—<br><span class="text-gold-400">it's worn.</span>
+            </h2>
+            <div class="slide-cta mt-9 flex items-center gap-4">
+              <a href="#products" class="inline-flex items-center gap-2 bg-gold-500 text-maroon-950 font-sans font-semibold px-8 py-4 rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/25 hover:scale-105">
+                Explore Collection <span class="iconify w-4 h-4" data-icon="lucide:arrow-right"></span>
+              </a>
+              <a href="https://wa.me/919044742251?text=Hi!%20I%20want%20to%20order%20Suvas%20Attars" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border-2 border-[#25D366]/50 text-[#25D366] font-sans text-sm font-semibold px-6 py-3.5 rounded-full hover:bg-[#25D366]/10 transition-all duration-300">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-8 left-0 right-0 z-10">
+      <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <button class="hero-nav-btn w-11 h-11 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 hover:bg-gold-500/10 hover:border-gold-500 transition-all" onclick="heroSlide(-1)" aria-label="Previous"><span class="iconify w-5 h-5" data-icon="lucide:chevron-left"></span></button>
+          <button class="hero-nav-btn w-11 h-11 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 hover:bg-gold-500/10 hover:border-gold-500 transition-all" onclick="heroSlide(1)" aria-label="Next"><span class="iconify w-5 h-5" data-icon="lucide:chevron-right"></span></button>
+          <span class="ml-3 font-sans text-xs text-cream-100/30 tracking-wider"><span id="slide-current" class="text-gold-400">01</span> / 02</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="hero-dot active" data-dot="0" aria-label="Slide 1"></button>
+          <button class="hero-dot" data-dot="1" aria-label="Slide 2"></button>
+        </div>
+      </div>
+    </div>
+    <div id="hero-progress" class="carousel-progress" style="width:0%"></div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="relative py-24 md:py-32">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-gold-500/[0.02] to-transparent pointer-events:none"></div>
+    <div class="relative max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <div class="ornament mb-4"><span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Our Collection</span></div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50">Shop <span class="text-gold-400">Fragrances</span></h2>
+        <p class="mt-4 font-body text-lg text-cream-100/50 max-w-xl mx-auto">Four timeless fragrances, each telling a story of purity and tradition</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="reveal product-card group bg-maroon-900/40 border border-gold-500/15 rounded-2xl overflow-hidden hover:border-gold-500/40 hover:shadow-2xl hover:shadow-gold-500/10 cursor-pointer" onclick="openProductModal(0)">
+          <div class="relative overflow-hidden product-bg p-6 pt-8">
+            <div class="absolute top-3 right-3 bg-gold-500 text-maroon-950 text-[10px] font-sans font-bold px-2 py-1 rounded-full uppercase tracking-wider z-10">Bestseller</div>
+            <img src="https://z-cdn-media.chatglm.cn/files/5f36ccc0-a3d7-4e7e-9380-9c50ce802608.png?auth_key=1884211499-cc6b3fd5b7a54d109d195fa7a2f22025-0-efceb28d6af8957b251c5fdd89ea5b14" alt="Shahi Gulab" class="product-img w-full h-56 object-contain rounded-xl mx-auto drop-shadow-2xl">
+          </div>
+          <div class="p-6"><p class="text-[10px] font-sans text-gold-500 tracking-[0.2em] uppercase mb-1">Floral · Rose</p><h3 class="font-display text-xl font-semibold text-cream-100 group-hover:text-gold-400 transition-colors">Shahi Gulab</h3><p class="mt-2 font-body text-sm text-cream-100/40 leading-relaxed">The royal rose — deep, velvety, and intoxicatingly rich.</p><div class="mt-4 flex items-center justify-between"><div><span class="font-display text-2xl font-bold text-gold-400">₹599</span><span class="text-xs font-sans text-cream-100/30 ml-1">/ 8ml</span></div><button onclick="event.stopPropagation(); addToCart('Shahi Gulab', 599)" class="w-10 h-10 rounded-full bg-gold-500 text-maroon-950 flex items-center justify-center hover:bg-gold-400 transition-colors hover:scale-110 duration-200"><span class="iconify w-4 h-4" data-icon="lucide:plus"></span></button></div></div>
+        </div>
+        <div class="reveal product-card group bg-maroon-900/40 border border-gold-500/15 rounded-2xl overflow-hidden hover:border-gold-500/40 hover:shadow-2xl hover:shadow-gold-500/10 cursor-pointer" onclick="openProductModal(1)">
+          <div class="relative overflow-hidden product-bg p-6 pt-8"><img src="https://z-cdn-media.chatglm.cn/files/55b9614c-a77d-42fd-8526-4f25ca9b8797.png?auth_key=1884211499-b9a5d998618e41539c2671871a49aafd-0-70c72dac362ebc96de42b5965be2b1ad" alt="Chandan Mridul" class="product-img w-full h-56 object-contain rounded-xl mx-auto drop-shadow-2xl"></div>
+          <div class="p-6"><p class="text-[10px] font-sans text-gold-500 tracking-[0.2em] uppercase mb-1">Woody · Sandal</p><h3 class="font-display text-xl font-semibold text-cream-100 group-hover:text-gold-400 transition-colors">Chandan Mridul</h3><p class="mt-2 font-body text-sm text-cream-100/40 leading-relaxed">Creamy sandalwood softened with floral whispers.</p><div class="mt-4 flex items-center justify-between"><div><span class="font-display text-2xl font-bold text-gold-400">₹649</span><span class="text-xs font-sans text-cream-100/30 ml-1">/ 8ml</span></div><button onclick="event.stopPropagation(); addToCart('Chandan Mridul', 649)" class="w-10 h-10 rounded-full bg-gold-500 text-maroon-950 flex items-center justify-center hover:bg-gold-400 transition-colors hover:scale-110 duration-200"><span class="iconify w-4 h-4" data-icon="lucide:plus"></span></button></div></div>
+        </div>
+        <div class="reveal product-card group bg-maroon-900/40 border border-gold-500/15 rounded-2xl overflow-hidden hover:border-gold-500/40 hover:shadow-2xl hover:shadow-gold-500/10 cursor-pointer" onclick="openProductModal(2)">
+          <div class="relative overflow-hidden product-bg p-6 pt-8">
+            <div class="absolute top-3 right-3 bg-rose-500 text-white text-[10px] font-sans font-bold px-2 py-1 rounded-full uppercase tracking-wider z-10">New</div>
+            <img src="https://z-cdn-media.chatglm.cn/files/da021b4e-57c9-4047-a45f-51ca70ab640c.png?auth_key=1884211499-68aa7ba34323405392ce0adc1e57ad96-0-a65539e9cc7df0d553867bbf9b3eecbc" alt="Musk-e-Aamir" class="product-img w-full h-56 object-contain rounded-xl mx-auto drop-shadow-2xl">
+          </div>
+          <div class="p-6"><p class="text-[10px] font-sans text-gold-500 tracking-[0.2em] uppercase mb-1">Musk · Oriental</p><h3 class="font-display text-xl font-semibold text-cream-100 group-hover:text-gold-400 transition-colors">Musk-e-Aamir</h3><p class="mt-2 font-body text-sm text-cream-100/40 leading-relaxed">A noble musk blend — warm, powerful, and captivating.</p><div class="mt-4 flex items-center justify-between"><div><span class="font-display text-2xl font-bold text-gold-400">₹699</span><span class="text-xs font-sans text-cream-100/30 ml-1">/ 8ml</span></div><button onclick="event.stopPropagation(); addToCart('Musk-e-Aamir', 699)" class="w-10 h-10 rounded-full bg-gold-500 text-maroon-950 flex items-center justify-center hover:bg-gold-400 transition-colors hover:scale-110 duration-200"><span class="iconify w-4 h-4" data-icon="lucide:plus"></span></button></div></div>
+        </div>
+        <div class="reveal product-card group bg-maroon-900/40 border border-gold-500/15 rounded-2xl overflow-hidden hover:border-gold-500/40 hover:shadow-2xl hover:shadow-gold-500/10 cursor-pointer" onclick="openProductModal(3)">
+          <div class="relative overflow-hidden product-bg p-6 pt-8"><img src="https://z-cdn-media.chatglm.cn/files/9c7732dc-bb9b-46e9-b26a-9663b68cfe26.png?auth_key=1884211499-0a563362b43449d38b935b101a12baa8-0-57b69be36e9254fc03563c785ea8ca97" alt="Ambar-e-Khas" class="product-img w-full h-56 object-contain rounded-xl mx-auto drop-shadow-2xl"></div>
+          <div class="p-6"><p class="text-[10px] font-sans text-gold-500 tracking-[0.2em] uppercase mb-1">Amber · Warm</p><h3 class="font-display text-xl font-semibold text-cream-100 group-hover:text-gold-400 transition-colors">Ambar-e-Khas</h3><p class="mt-2 font-body text-sm text-cream-100/40 leading-relaxed">Rich amber fused with exotic spices. Bold & warm.</p><div class="mt-4 flex items-center justify-between"><div><span class="font-display text-2xl font-bold text-gold-400">₹749</span><span class="text-xs font-sans text-cream-100/30 ml-1">/ 8ml</span></div><button onclick="event.stopPropagation(); addToCart('Ambar-e-Khas', 749)" class="w-10 h-10 rounded-full bg-gold-500 text-maroon-950 flex items-center justify-center hover:bg-gold-400 transition-colors hover:scale-110 duration-200"><span class="iconify w-4 h-4" data-icon="lucide:plus"></span></button></div></div>
+        </div>
+      </div>
+      <div class="reveal text-center mt-14">
+        <p class="font-body text-cream-100/40 mb-4">All attars come in premium 8ml crystal decanter with box pack</p>
+        <a href="https://wa.me/919044742251?text=Hi!%20I%20want%20to%20place%20a%20bulk%20order%20for%20Suvas%20Attars" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-sans font-semibold px-10 py-4 rounded-full hover:bg-[#20bd5a] transition-all duration-300 hover:shadow-lg hover:shadow-[#25D366]/25 hover:scale-105">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Place Bulk Orders via WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY SUVAS -->
+  <section class="relative py-24 md:py-32 bg-maroon-900/30">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <div class="ornament mb-4"><span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Why Choose Us</span></div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50">The Suvas <span class="text-gold-400">Promise</span></h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="reveal text-center p-8 border border-gold-500/10 rounded-2xl hover:border-gold-500/30 transition-colors duration-500 group"><div class="w-16 h-16 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-5 group-hover:bg-gold-500/20 transition-colors"><span class="iconify w-7 h-7 text-gold-400" data-icon="lucide:shield-check"></span></div><h3 class="font-display text-xl font-semibold text-cream-100 mb-2">Guaranteed Purity</h3><p class="font-body text-cream-100/40">Every attar is lab-tested for purity. No synthetics, no chemicals — just nature's unadulterated essence.</p></div>
+        <div class="reveal text-center p-8 border border-gold-500/10 rounded-2xl hover:border-gold-500/30 transition-colors duration-500 group"><div class="w-16 h-16 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-5 group-hover:bg-gold-500/20 transition-colors"><span class="iconify w-6 h-6 text-gold-400" data-icon="lucide:truck"></span></div><h3 class="font-display text-xl font-semibold text-cream-100 mb-2">Affordability</h3><p class="font-body text-cream-100/40">We believe in making luxury accessible. Enjoy premium attars without the premium price tag.</p></div>
+        <div class="reveal text-center p-8 border border-gold-500/10 rounded-2xl hover:border-gold-500/30 transition-colors duration-500 group sm:col-span-2 lg:col-span-1"><div class="w-16 h-16 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-5 group-hover:bg-gold-500/20 transition-colors"><span class="iconify w-7 h-7 text-gold-400" data-icon="lucide:sparkles"></span></div><h3 class="font-display text-xl font-semibold text-cream-100 mb-2">Luxury Packaging</h3><p class="font-body text-cream-100/40">Premium 8ml crystal decanter with box pack — perfect for gifting or personal indulgence.</p></div>
+      </div>
+    </div>
+  </section>
+
+<!-- INSTAGRAM FOLLOW -->
+<section id="instagram" class="relative py-24 md:py-32">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="reveal text-center mb-12">
+      <div class="ornament mb-4"><span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Stay Connected</span></div>
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50">Join the <span class="text-gold-400">Vibe</span></h2>
+      <p class="mt-4 font-body text-lg text-cream-100/50 max-w-xl mx-auto">Follow our journey, catch behind-the-scenes drops, and be the first to vibe with new launches</p>
+    </div>
+
+    <div class="reveal ornate-border rounded-2xl p-8 md:p-12 bg-maroon-900/40 text-center relative overflow-hidden">
+      <!-- Decorative glows -->
+      <div class="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gold-500/5 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-gold-500/5 blur-3xl pointer-events-none"></div>
+
+      <div class="relative">
+        <!-- Instagram gradient icon -->
+        <div class="w-20 h-20 mx-auto rounded-2xl p-[3px] mb-6 float-anim" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
+          <div class="w-full h-full rounded-2xl bg-maroon-950 flex items-center justify-center">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </div>
+        </div>
+
+        <p class="font-sans text-xs text-gold-400 tracking-[0.25em] uppercase mb-2">Follow us on Instagram</p>
+        <h3 class="font-display text-3xl font-bold text-cream-50 mb-1">@suvas_fragnance_2000</h3>
+        <p class="font-body text-cream-100/40 max-w-md mx-auto mb-8">Drops, behind-the-scenes, and pure attar aesthetics — straight to your feed. No cap, just vibes.</p>
+
+        <a href="https://www.instagram.com/suvas_fragnance_2000/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-gold-500 text-maroon-950 font-sans font-semibold px-10 py-4 rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/25 hover:scale-105">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          Follow @suvas_fragnance_2000
+        </a>
+
+        <p class="mt-6 font-sans text-xs text-cream-100/30">Tag us in your Suvas moments — we repost our favorites ✦</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="relative py-24 md:py-32 bg-maroon-900/30">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="reveal text-center mb-12">
+        <div class="ornament mb-4"><span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Get in Touch</span></div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50">Place Your <span class="text-gold-400">Order</span></h2>
+        <p class="mt-4 font-body text-lg text-cream-100/50 max-w-xl mx-auto">Fill in your details and we'll confirm your order via WhatsApp</p>
+      </div>
+      <div class="reveal ornate-border rounded-2xl p-8 md:p-12 bg-maroon-900/50">
+        <form id="order-form" class="space-y-6">
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div><label class="block text-xs font-sans text-gold-400 tracking-wider uppercase mb-2">Your Name</label><input type="text" id="cust-name" required class="w-full bg-maroon-950/60 border border-gold-500/20 rounded-lg px-4 py-3 text-cream-100 font-sans text-sm focus:outline-none focus:border-gold-500/60 transition-colors placeholder:text-cream-100/20" placeholder="Enter your name"></div>
+            <div><label class="block text-xs font-sans text-gold-400 tracking-wider uppercase mb-2">Phone / WhatsApp</label><input type="tel" id="cust-phone" required class="w-full bg-maroon-950/60 border border-gold-500/20 rounded-lg px-4 py-3 text-cream-100 font-sans text-sm focus:outline-none focus:border-gold-500/60 transition-colors placeholder:text-cream-100/20" placeholder="+91 XXXXX XXXXX"></div>
+          </div>
+          <div><label class="block text-xs font-sans text-gold-400 tracking-wider uppercase mb-2">Delivery Address</label><textarea id="cust-address" rows="3" class="w-full bg-maroon-950/60 border border-gold-500/20 rounded-lg px-4 py-3 text-cream-100 font-sans text-sm focus:outline-none focus:border-gold-500/60 transition-colors placeholder:text-cream-100/20 resize-none" placeholder="Full delivery address with pincode"></textarea></div>
+          <div><label class="block text-xs font-sans text-gold-400 tracking-wider uppercase mb-3">Select Attars</label>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <label class="flex items-center gap-3 p-3 border border-gold-500/15 rounded-lg cursor-pointer hover:border-gold-500/40 transition-colors group"><input type="checkbox" name="product" value="Shahi Gulab - ₹599" class="w-4 h-4 accent-gold-500"><div><p class="font-sans text-sm font-medium text-cream-100 group-hover:text-gold-400 transition-colors">Shahi Gulab</p><p class="font-sans text-xs text-cream-100/40">₹599 / 8ml</p></div></label>
+              <label class="flex items-center gap-3 p-3 border border-gold-500/15 rounded-lg cursor-pointer hover:border-gold-500/40 transition-colors group"><input type="checkbox" name="product" value="Chandan Mridul - ₹649" class="w-4 h-4 accent-gold-500"><div><p class="font-sans text-sm font-medium text-cream-100 group-hover:text-gold-400 transition-colors">Chandan Mridul</p><p class="font-sans text-xs text-cream-100/40">₹649 / 8ml</p></div></label>
+              <label class="flex items-center gap-3 p-3 border border-gold-500/15 rounded-lg cursor-pointer hover:border-gold-500/40 transition-colors group"><input type="checkbox" name="product" value="Musk-e-Aamir - ₹699" class="w-4 h-4 accent-gold-500"><div><p class="font-sans text-sm font-medium text-cream-100 group-hover:text-gold-400 transition-colors">Musk-e-Aamir</p><p class="font-sans text-xs text-cream-100/40">₹699 / 8ml</p></div></label>
+              <label class="flex items-center gap-3 p-3 border border-gold-500/15 rounded-lg cursor-pointer hover:border-gold-500/40 transition-colors group"><input type="checkbox" name="product" value="Ambar-e-Khas - ₹749" class="w-4 h-4 accent-gold-500"><div><p class="font-sans text-sm font-medium text-cream-100 group-hover:text-gold-400 transition-colors">Ambar-e-Khas</p><p class="font-sans text-xs text-cream-100/40">₹749 / 8ml</p></div></label>
+            </div>
+          </div>
+          <div><label class="block text-xs font-sans text-gold-400 tracking-wider uppercase mb-2">Special Instructions (Optional)</label><input type="text" id="cust-notes" class="w-full bg-maroon-950/60 border border-gold-500/20 rounded-lg px-4 py-3 text-cream-100 font-sans text-sm focus:outline-none focus:border-gold-500/60 transition-colors placeholder:text-cream-100/20" placeholder="Gift wrapping, bulk quantities, etc."></div>
+          <button type="submit" class="w-full flex items-center justify-center gap-2 bg-gold-500 text-maroon-950 font-sans font-bold text-base px-8 py-4 rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/25 hover:scale-[1.02]"><span class="iconify w-5 h-5" data-icon="lucide:send"></span>Send Order Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT MODAL -->
+  <div id="product-modal" class="modal-overlay fixed inset-0 z-[70] bg-maroon-950/90 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="modal-content bg-maroon-900 border border-gold-500/20 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="grid md:grid-cols-2">
+        <div class="relative bg-gradient-to-b from-gold-500/5 to-transparent flex items-center justify-center p-8">
+          <img id="modal-img" src="" alt="" class="w-full max-w-[280px] h-auto object-contain drop-shadow-2xl">
+          <button onclick="closeProductModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-maroon-950/70 backdrop-blur flex items-center justify-center text-gold-400 hover:bg-maroon-950 transition-colors md:hidden"><span class="iconify w-5 h-5" data-icon="lucide:x"></span></button>
+        </div>
+        <div class="p-8 md:p-10 relative">
+          <button onclick="closeProductModal()" class="hidden md:flex absolute top-4 right-4 w-10 h-10 rounded-full bg-maroon-950/50 items-center justify-center text-gold-400 hover:bg-maroon-950 transition-colors"><span class="iconify w-5 h-5" data-icon="lucide:x"></span></button>
+          <p id="modal-category" class="text-xs font-sans text-gold-500 tracking-[0.2em] uppercase mb-2"></p>
+          <h3 id="modal-name" class="font-display text-3xl font-bold text-cream-50 mb-2"></h3>
+          <div class="flex items-center gap-3 mb-4"><span id="modal-price" class="font-display text-2xl font-bold text-gold-400"></span><span class="text-xs font-sans text-cream-100/30">/ 8ml</span><span class="text-xs font-sans bg-gold-500/10 text-gold-400 px-2 py-0.5 rounded-full">Net Qty: 8ml</span></div>
+          <div class="w-12 h-0.5 bg-gold-500/40 mb-4"></div>
+          <p id="modal-desc" class="font-body text-cream-100/60 leading-relaxed mb-6"></p>
+          <div class="mb-6"><p class="text-xs font-sans text-gold-400 tracking-wider uppercase mb-3">Fragrance Notes</p><div class="flex flex-wrap gap-2" id="modal-notes"></div></div>
+          <div class="mb-6"><p class="text-xs font-sans text-gold-400 tracking-wider uppercase mb-3">Quantity</p><div class="flex items-center gap-4"><button onclick="changeQty(-1)" class="qty-btn"><span class="iconify w-4 h-4" data-icon="lucide:minus"></span></button><span id="modal-qty" class="font-sans text-lg text-cream-100 w-8 text-center">1</span><button onclick="changeQty(1)" class="qty-btn"><span class="iconify w-4 h-4" data-icon="lucide:plus"></span></button></div></div>
+          <div class="flex gap-3">
+            <button onclick="addFromModal()" class="flex-1 flex items-center justify-center gap-2 bg-gold-500 text-maroon-950 font-sans font-semibold py-3.5 rounded-full hover:bg-gold-400 transition-all duration-300"><span class="iconify w-4 h-4" data-icon="lucide:shopping-bag"></span>Add to Order</button>
+            <button onclick="orderFromModal()" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-sans font-semibold px-6 py-3.5 rounded-full hover:bg-[#20bd5a] transition-all duration-300"><svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gold-500/10 py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div class="sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://z-cdn-media.chatglm.cn/files/446440fc-504f-4109-ba00-5720dc1ed85d.png?auth_key=1884197723-b2ae75c0f6a1447a9461ae9f82d9f91c-0-186d1b22ea4c29dc90d812ece38a787d" alt="Suvas Logo" class="w-10 h-10 object-contain">
+            <div><span class="font-display text-xl text-gold-400 tracking-[0.15em] leading-none block">SUVAS</span><span class="text-[8px] font-sans text-gold-500/50 tracking-[0.3em] uppercase leading-none">A Parampara of Purity</span></div>
+          </div>
+          <p class="font-body text-cream-100/40 text-sm leading-relaxed">Handcrafted attars from the perfumers of Banaras.</p>
+        </div>
+        <div><h4 class="font-sans text-xs text-gold-400 tracking-[0.2em] uppercase mb-4">Contact</h4><div class="flex flex-col gap-2"><a href="tel:+919044742251" class="font-sans text-sm text-cream-100/50 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="iconify w-4 h-4" data-icon="lucide:phone"></span>+91 90447 42251</a><a href="https://wa.me/919044742251" target="_blank" rel="noopener" class="font-sans text-sm text-cream-100/50 hover:text-gold-400 transition-colors flex items-center gap-2"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a><a href="#" class="font-sans text-sm text-cream-100/50 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="iconify w-4 h-4" data-icon="lucide:map-pin"></span>Varanasi, Uttar Pradesh</a></div></div>
+        <div><h4 class="font-sans text-xs text-gold-400 tracking-[0.2em] uppercase mb-4">Follow Us</h4><div class="flex gap-3"><a href="#" class="w-10 h-10 rounded-full border border-gold-500/20 flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-maroon-950 transition-all duration-300"><span class="iconify w-4 h-4" data-icon="https://www.instagram.com/suvas_fragnance_2000/# "></span></a><a href="#" class="w-10 h-10 rounded-full border border-gold-500/20 flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-maroon-950 transition-all duration-300"><span class="iconify w-4 h-4" data-icon="lucide:facebook"></span></a><a href="https://wa.me/919044742251" target="_blank" rel="noopener" class="w-10 h-10 rounded-full border border-gold-500/20 flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-maroon-950 transition-all duration-300"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a></div></div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-gold-500/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="font-sans text-xs text-cream-100/25">© 2026 Suvas Attars. All rights reserved.</p>
+        <div class="flex items-center gap-2"><img src="https://z-cdn-media.chatglm.cn/files/446440fc-504f-4109-ba00-5720dc1ed85d.png?auth_key=1884197723-b2ae75c0f6a1447a9461ae9f82d9f91c-0-186d1b22ea4c29dc90d812ece38a787d" alt="Suvas" class="w-5 h-5 object-contain opacity-40"><p class="font-sans text-xs text-cream-100/25">Crafted with <span class="text-gold-500">♥</span> in Banaras</p></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const products = [
+      { name:'Shahi Gulab', category:'Floral · Rose', price:599, img:'https://z-cdn-media.chatglm.cn/files/5f36ccc0-a3d7-4e7e-9380-9c50ce802608.png?auth_key=1884211499-cc6b3fd5b7a54d109d195fa7a2f22025-0-efceb28d6af8957b251c5fdd89ea5b14', desc:'The royal rose — deep, velvety, and intoxicatingly rich. Shahi Gulab captures the majestic essence of handpicked Damask roses from the fields of Banaras, hydro-distilled over pure sandalwood oil.', notes:['Damask Rose','Sandalwood','Saffron','Oud'] },
+      { name:'Chandan Mridul', category:'Woody · Sandal', price:649, img:'https://z-cdn-media.chatglm.cn/files/55b9614c-a77d-42fd-8526-4f25ca9b8797.png?auth_key=1884211499-b9a5d998618e41539c2671871a49aafd-0-70c72dac362ebc96de42b5965be2b1ad', desc:'Creamy sandalwood softened with floral whispers. Chandan Mridul is a meditation in a bottle — warm, buttery Mysore sandalwood blended with delicate white florals.', notes:['Mysore Sandalwood','Jasmine','Vetiver','Cardamom'] },
+      { name:'Musk-e-Aamir', category:'Musk · Oriental', price:699, img:'https://z-cdn-media.chatglm.cn/files/da021b4e-57c9-4047-a45f-51ca70ab640c.png?auth_key=1884211499-68aa7ba34323405392ce0adc1e57ad96-0-a65539e9cc7df0d553867bbf9b3eecbc', desc:'A noble musk blend — warm, powerful, and undeniably captivating. Musk-e-Aamir weaves the primal allure of clean musk with the depth of oriental spices.', notes:['Clean Musk','Amber','Black Pepper','Patchouli'] },
+      { name:'Ambar-e-Khas', category:'Amber · Warm', price:749, img:'https://z-cdn-media.chatglm.cn/files/9c7732dc-bb9b-46e9-b26a-9663b68cfe26.png?auth_key=1884211499-0a563362b43449d38b935b101a12baa8-0-57b69be36e9254fc03563c785ea8ca97', desc:'Rich amber fused with exotic spices. Bold, warm, and unforgettable. A complex, evolving fragrance for those who dare to be extraordinary.', notes:['Amber Resin','Cinnamon','Labdanum','Vanilla'] }
+    ];
+    let currentModalProduct=0, currentQty=1;
+
+    const navbar=document.getElementById('navbar');
+    window.addEventListener('scroll',()=>{
+      if(window.scrollY>50){navbar.style.top='0';navbar.classList.add('bg-maroon-950/95','backdrop-blur-xl','border-b','border-gold-500/10','shadow-lg');}
+      else{navbar.style.top='33px';navbar.classList.remove('bg-maroon-950/95','backdrop-blur-xl','border-b','border-gold-500/10','shadow-lg');}
+    });
+
+    document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('mobile-menu').classList.add('open'));
+    document.getElementById('menu-close').addEventListener('click',()=>document.getElementById('mobile-menu').classList.remove('open'));
+    document.querySelectorAll('.mobile-link').forEach(l=>l.addEventListener('click',()=>document.getElementById('mobile-menu').classList.remove('open')));
+
+    const rO=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>rO.observe(el));
+
+    let currentHeroSlide=0;const totalHeroSlides=2;
+    const heroSlides=document.querySelectorAll('.hero-slide');
+    const heroDots=document.querySelectorAll('.hero-dot');
+    const heroProgress=document.getElementById('hero-progress');
+    const slideCurrentEl=document.getElementById('slide-current');
+    let heroInterval,progressInterval,progressValue=0;const SLIDE_DURATION=6000;
+
+    function goHeroSlide(index){
+      currentHeroSlide=((index%totalHeroSlides)+totalHeroSlides)%totalHeroSlides;
+      heroSlides.forEach((s,i)=>s.classList.toggle('active',i===currentHeroSlide));
+      heroDots.forEach((d,i)=>d.classList.toggle('active',i===currentHeroSlide));
+      slideCurrentEl.textContent=String(currentHeroSlide+1).padStart(2,'0');
+      resetProgress();
+    }
+    function heroSlide(dir){goHeroSlide(currentHeroSlide+dir);}
+    function resetProgress(){
+      progressValue=0;heroProgress.style.width='0%';
+      clearInterval(progressInterval);clearInterval(heroInterval);
+      progressInterval=setInterval(()=>{progressValue+=100/(SLIDE_DURATION/50);heroProgress.style.width=Math.min(progressValue,100)+'%';},50);
+      heroInterval=setInterval(()=>goHeroSlide(currentHeroSlide+1),SLIDE_DURATION);
+    }
+    heroDots.forEach(d=>d.addEventListener('click',()=>goHeroSlide(parseInt(d.dataset.dot))));
+    resetProgress();
+
+    let heroTouchX=0;
+    document.querySelector('.hero-carousel').addEventListener('touchstart',e=>{heroTouchX=e.touches[0].clientX;clearInterval(heroInterval);clearInterval(progressInterval);},{passive:true});
+    document.querySelector('.hero-carousel').addEventListener('touchend',e=>{const diff=heroTouchX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)heroSlide(diff>0?1:-1);resetProgress();},{passive:true});
+
+    function showToast(msg,type='success'){const c=document.getElementById('toast-container');const t=document.createElement('div');const ic=type==='success'?'lucide:check-circle':'lucide:alert-circle';const bg=type==='success'?'bg-green-900/90':'bg-red-900/90';t.className=`toast-in ${bg} backdrop-blur-lg border border-gold-500/20 rounded-xl px-5 py-4 shadow-xl flex items-center gap-3 max-w-sm`;t.innerHTML=`<span class="iconify w-5 h-5 text-gold-400 flex-shrink-0" data-icon="${ic}"></span><span class="font-sans text-sm text-cream-100">${msg}</span>`;c.appendChild(t);setTimeout(()=>{t.classList.remove('toast-in');t.classList.add('toast-out');setTimeout(()=>t.remove(),400);},3000);}
+
+    function addToCart(name,price){document.querySelectorAll('input[name="product"]').forEach(cb=>{if(cb.value.includes(name))cb.checked=true;});const count=document.querySelectorAll('input[name="product"]:checked').length;showToast(`${name} added! (${count} item${count>1?'s':''} selected)`,'success');setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),800);}
+
+    function openProductModal(i){currentModalProduct=i;currentQty=1;const p=products[i];document.getElementById('modal-img').src=p.img;document.getElementById('modal-img').alt=p.name;document.getElementById('modal-category').textContent=p.category;document.getElementById('modal-name').textContent=p.name;document.getElementById('modal-price').textContent=`₹${p.price}`;document.getElementById('modal-desc').textContent=p.desc;document.getElementById('modal-qty').textContent=currentQty;document.getElementById('modal-notes').innerHTML=p.notes.map(n=>`<span class="px-3 py-1 rounded-full border border-gold-500/20 text-xs font-sans text-gold-400">${n}</span>`).join('');document.getElementById('product-modal').classList.add('open');document.body.style.overflow='hidden';}
+    function closeProductModal(){document.getElementById('product-modal').classList.remove('open');document.body.style.overflow='';}
+    document.getElementById('product-modal').addEventListener('click',e=>{if(e.target===document.getElementById('product-modal'))closeProductModal();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProductModal();});
+    function changeQty(d){currentQty=Math.max(1,Math.min(10,currentQty+d));document.getElementById('modal-qty').textContent=currentQty;}
+    function addFromModal(){const p=products[currentModalProduct];document.querySelectorAll('input[name="product"]').forEach(cb=>{if(cb.value.includes(p.name))cb.checked=true;});showToast(`${p.name} (×${currentQty}) added to order!`,'success');closeProductModal();setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),400);}
+    function orderFromModal(){const p=products[currentModalProduct];const total=p.price*currentQty;const msg=`🫶 *New Suvas Order*\n\n🧴 *Product:* ${p.name}\n💰 *Price:* ₹${p.price} × ${currentQty} = ₹${total}\n📦 *Net Qty:* ${8*currentQty}ml\n\nPlease confirm my order!`;window.open(`https://wa.me/919044742251?text=${encodeURIComponent(msg)}`,'_blank');closeProductModal();}
+
+    document.getElementById('order-form').addEventListener('submit',function(e){e.preventDefault();const name=document.getElementById('cust-name').value.trim();const phone=document.getElementById('cust-phone').value.trim();const address=document.getElementById('cust-address').value.trim();const notes=document.getElementById('cust-notes').value.trim();const sel=Array.from(document.querySelectorAll('input[name="product"]:checked')).map(cb=>cb.value);if(!name||!phone){showToast('Please fill in your name and phone number.','error');return;}if(!sel.length){showToast('Please select at least one attar.','error');return;}let msg=`🫶 *New Suvas Order*\n\n👤 *Name:* ${name}\n📱 *Phone:* ${phone}\n`;if(address)msg+=`📍 *Address:* ${address}\n`;msg+=`\n🧴 *Products:*\n`;sel.forEach(p=>msg+=`   • ${p}\n`);if(notes)msg+=`\n📝 *Notes:* ${notes}`;msg+=`\n\n— Sent from Suvas website`;window.open(`https://wa.me/919044742251?text=${encodeURIComponent(msg)}`,'_blank');showToast('Redirecting to WhatsApp to confirm your order!','success');this.reset();});
+
+    window.addEventListener('scroll',()=>{let current='';document.querySelectorAll('section[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-100)current=s.id;});document.querySelectorAll('.nav-link').forEach(l=>{l.classList.remove('text-gold-400','active');if(l.getAttribute('href')===`#${current}`)l.classList.add('text-gold-400','active');});});
+  </script>
+</body>
+</html>
