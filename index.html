@@ -189,6 +189,7 @@
         <span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Artisanal Blends</span>
         <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50 mt-2">The Signature <span class="text-gold-400">Collection</span></h2>
         <p class="mt-3 font-body text-lg text-cream-100/50">Reserve Your Scent — Pre-Booking Phase Active</p>
+        <p class="mt-2 text-xs font-sans text-gold-400/80 italic">* Final price will be revealed at launch. Secure your bottle for just ₹200.</p>
 
         <!-- Category Filters -->
         <div class="mt-8 flex flex-wrap justify-center gap-3 font-sans text-xs uppercase tracking-wider">
@@ -305,26 +306,19 @@
           </div>
 
           <div class="mt-6 pt-4 border-t border-gold-500/15 space-y-2 text-sm">
-            <div class="flex justify-between text-cream-100/60">
-              <span>Subtotal</span>
-              <span id="summary-subtotal">₹0</span>
-            </div>
-            <div class="flex justify-between text-cream-100/60">
-              <span>Estimated Express Shipping</span>
-              <span class="text-gold-400">FREE (Dispatching Soon)</span>
-            </div>
-            <div class="flex justify-between text-cream-100/60">
-              <span>Remaining Balance (Pay on Dispatch)</span>
-              <span id="summary-balance">₹0</span>
-            </div>
-            <div class="flex justify-between text-lg font-bold text-gold-400 pt-3 border-t border-gold-500/15">
+            <div class="flex justify-between text-lg font-bold text-gold-400">
               <span>Pre-Booking Amount (Pay Now)</span>
               <span id="summary-total">₹0</span>
             </div>
           </div>
 
+          <div class="mt-4 p-3 bg-maroon-800/50 rounded-lg border border-gold-500/10 text-xs text-cream-100/60 flex items-start gap-2">
+            <span class="iconify text-gold-400 mt-0.5" data-icon="lucide:info"></span>
+            <span>Final price will be shown after launch. You are only paying the pre-booking token amount now.</span>
+          </div>
+
           <button onclick="submitOrder()" class="mt-6 w-full bg-gold-500 hover:bg-gold-400 text-maroon-950 font-bold py-4 rounded-xl transition-all shadow-lg shadow-gold-500/20 flex items-center justify-center gap-2 text-base">
-            <span class="iconify w-5 h-5" data-icon="lucide:check-circle"></span> Pay ₹200 & Reserve via WhatsApp
+            <span class="iconify w-5 h-5" data-icon="lucide:check-circle"></span> Reserve via WhatsApp
           </button>
           
           <p class="text-[11px] text-center text-cream-100/40 mt-3">🔒 Pre-Booking Active. Deliveries start soon!</p>
@@ -352,7 +346,7 @@
 
       <div class="p-6 border-t border-gold-500/15 bg-maroon-950/50 font-sans">
         <div class="flex justify-between items-center text-lg font-bold text-gold-400 mb-4">
-          <span>Total Value:</span>
+          <span>Total Pre-Booking:</span>
           <span id="drawer-total-price">₹0</span>
         </div>
         <button onclick="toggleCartDrawer(); switchView('checkout');" class="w-full bg-gold-500 hover:bg-gold-400 text-maroon-950 font-bold py-3.5 rounded-xl transition-all">
@@ -375,6 +369,7 @@
           <h3 id="modal-title" class="font-display text-3xl font-bold text-cream-50 mt-1"></h3>
           <p id="modal-price" class="font-display text-2xl font-bold text-gold-400 mt-2"></p>
           <p id="modal-desc" class="font-body text-cream-100/60 text-base mt-4 leading-relaxed"></p>
+          <p class="font-sans text-[11px] text-gold-400/80 mt-2 italic">* Final price will be revealed at launch.</p>
           
           <div class="mt-6 flex items-center gap-4">
             <button onclick="addToCartFromModal()" class="flex-1 bg-gold-500 text-maroon-950 font-sans font-semibold py-3 rounded-xl hover:bg-gold-400 transition-all">
@@ -428,10 +423,10 @@
   <script>
     // --- 1. PRODUCT CATALOG DATA ---
     const PRODUCTS = [
-      { id: 1, name: 'Aaroh', size: '10ml', category: 'Floral', price: 599, img: 'https://z-cdn-media.chatglm.cn/files/2c3af9ee-9232-4e2a-98a4-b84b48202f8e.png?auth_key=1886209822-2c92247076b049e6b55ddd076ec6b30d-0-57d815988c51b73627b4b2c8d61f74fa', desc: 'The royal rose — deep, velvety, and intoxicatingly rich hydro-distilled Damask roses.' },
-      { id: 2, name: 'Vyom', size: '15ml', category: 'Woody', price: 649, img: 'https://z-cdn-media.chatglm.cn/files/7343d869-7f3c-4577-800a-1c4194e4866d.png?auth_key=1886209926-47130c5222fe486da7b2a4fd5087cbac-0-69a44c9e2921cfb34aa0335eb981d6e3', desc: 'Creamy Mysore sandalwood softened with delicate white floral whispers.' },
-      { id: 3, name: 'Rasa', size: '8ml', category: 'Musk', price: 699, img: 'https://z-cdn-media.chatglm.cn/files/643ae655-f0a0-45d5-809d-73986a9d0546.png?auth_key=1886210056-17519de1a1884888a6bda415570bc804-0-fa9851262040cef82a9c867e2168c7c1', desc: 'A noble musk blend — warm, powerful, and undeniably captivating oriental spice.' },
-      { id: 4, name: 'Oja', size: '12ml', category: 'Amber', price: 749, img: 'https://z-cdn-media.chatglm.cn/files/cbc05b5c-08fa-4ade-ba99-5959f62eb046.png?auth_key=1886210185-7f360907e0374c388257d7f31055ccd4-0-5a9f69bc2512f88b27e5647f12ddb052', desc: 'Rich amber resin fused with exotic cinnamon and labdanum.' }
+      { id: 1, name: 'Aaroh', size: '10ml', category: 'Floral', img: 'https://z-cdn-media.chatglm.cn/files/2c3af9ee-9232-4e2a-98a4-b84b48202f8e.png?auth_key=1886209822-2c92247076b049e6b55ddd076ec6b30d-0-57d815988c51b73627b4b2c8d61f74fa', desc: 'The royal rose — deep, velvety, and intoxicatingly rich hydro-distilled Damask roses.' },
+      { id: 2, name: 'Vyom', size: '15ml', category: 'Woody', img: 'https://z-cdn-media.chatglm.cn/files/7343d869-7f3c-4577-800a-1c4194e4866d.png?auth_key=1886209926-47130c5222fe486da7b2a4fd5087cbac-0-69a44c9e2921cfb34aa0335eb981d6e3', desc: 'Creamy Mysore sandalwood softened with delicate white floral whispers.' },
+      { id: 3, name: 'Rasa', size: '8ml', category: 'Musk', img: 'https://z-cdn-media.chatglm.cn/files/643ae655-f0a0-45d5-809d-73986a9d0546.png?auth_key=1886210056-17519de1a1884888a6bda415570bc804-0-fa9851262040cef82a9c867e2168c7c1', desc: 'A noble musk blend — warm, powerful, and undeniably captivating oriental spice.' },
+      { id: 4, name: 'Oja', size: '12ml', category: 'Amber', img: 'https://z-cdn-media.chatglm.cn/files/cbc05b5c-08fa-4ade-ba99-5959f62eb046.png?auth_key=1886210185-7f360907e0374c388257d7f31055ccd4-0-5a9f69bc2512f88b27e5647f12ddb052', desc: 'Rich amber resin fused with exotic cinnamon and labdanum.' }
     ];
 
     const PREBOOKING_AMOUNT = 200;
@@ -515,8 +510,8 @@
           </div>
           <div class="mt-6 flex items-center justify-between font-sans">
             <div>
-              <span class="font-display text-2xl font-bold text-gold-400 block leading-none">₹${p.price}</span>
-              <span class="text-[10px] text-cream-100/50 mt-1 block">/ ${p.size} | Pre-book ₹200</span>
+              <span class="font-display text-xl font-bold text-gold-400 block leading-none">Pre-Book ₹200</span>
+              <span class="text-[10px] text-cream-100/50 mt-1 block">/ ${p.size}</span>
             </div>
             <button onclick="addToCart(${p.id})" class="bg-gold-500 hover:bg-gold-400 text-maroon-950 p-3 rounded-full transition-transform active:scale-90">
               <span class="iconify w-4 h-4" data-icon="lucide:plus"></span>
@@ -560,7 +555,7 @@
             <img src="${item.img}" class="w-12 h-12 object-contain bg-gold-500/5 rounded-lg">
             <div class="flex-1">
               <h4 class="font-bold text-cream-50">${item.name} <span class="text-cream-100/40 font-normal text-[10px]">(${item.size})</span></h4>
-              <p class="text-xs text-gold-400">₹${item.price} × ${item.qty}</p>
+              <p class="text-xs text-gold-400">Pre-book ₹200 × ${item.qty}</p>
             </div>
             <div class="flex items-center gap-2">
               <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 border border-gold-500/30 rounded text-gold-400 flex items-center justify-center">-</button>
@@ -571,7 +566,7 @@
         `).join('');
       }
 
-      const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const totalAmount = totalCount * PREBOOKING_AMOUNT;
       document.getElementById('drawer-total-price').textContent = `₹${totalAmount}`;
       
       renderCheckoutSummary();
@@ -615,20 +610,16 @@
           <div class="flex justify-between items-center py-3 text-xs">
             <div>
               <p class="font-semibold text-cream-50">${item.name} <span class="text-cream-100/40 font-normal">(${item.size})</span></p>
-              <p class="text-cream-100/40">Qty: ${item.qty} × ₹${item.price}</p>
+              <p class="text-cream-100/40">Qty: ${item.qty} × ₹200</p>
             </div>
-            <span class="font-bold text-gold-400">₹${item.price * item.qty}</span>
+            <span class="font-bold text-gold-400">₹${200 * item.qty}</span>
           </div>
         `).join('');
       }
 
-      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-      const prebookingAmount = cart.length > 0 ? PREBOOKING_AMOUNT : 0;
-      const balance = total - prebookingAmount;
-
-      document.getElementById('summary-subtotal').textContent = `₹${total}`;
-      document.getElementById('summary-balance').textContent = `₹${balance}`;
-      document.getElementById('summary-total').textContent = `₹${prebookingAmount}`;
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      const prebookingTotal = totalCount * PREBOOKING_AMOUNT;
+      document.getElementById('summary-total').textContent = `₹${prebookingTotal}`;
     }
 
     function submitOrder() {
@@ -651,16 +642,14 @@
       orderText += `\n🧴 *Booked Items:*\n`;
 
       cart.forEach(item => {
-        orderText += ` • ${item.name} (${item.size}) (x${item.qty}) - ₹${item.price * item.qty}\n`;
+        orderText += ` • ${item.name} (${item.size}) (x${item.qty})\n`;
       });
 
-      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-      const balance = total - PREBOOKING_AMOUNT;
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      const prebookingTotal = totalCount * PREBOOKING_AMOUNT;
       
-      orderText += `\n💰 *Total Order Value:* ₹${total}`;
-      orderText += `\n💳 *Pre-Booking Amount (Paid Now):* ₹${PREBOOKING_AMOUNT}`;
-      orderText += `\n⏳ *Balance Due on Dispatch:* ₹${balance}`;
-      orderText += `\n\n📅 *Note:* Deliveries haven't started yet, but your booking is secured with ₹200!`;
+      orderText += `\n💳 *Pre-Booking Amount Paid:* ₹${prebookingTotal}`;
+      orderText += `\n\n📅 *Note:* Final price will be revealed at launch. Your booking is secured!`;
 
       window.open(`https://wa.me/919044742251?text=${encodeURIComponent(orderText)}`, '_blank');
       showToast('Redirecting to WhatsApp to confirm booking!');
@@ -673,7 +662,7 @@
       document.getElementById('modal-img').src = p.img;
       document.getElementById('modal-category').textContent = `${p.category} | ${p.size}`;
       document.getElementById('modal-title').textContent = p.name;
-      document.getElementById('modal-price').textContent = `₹${p.price} (Pre-book ₹200)`;
+      document.getElementById('modal-price').textContent = `Pre-Booking: ₹200`;
       document.getElementById('modal-desc').textContent = p.desc;
 
       document.getElementById('product-modal').classList.remove('hidden');
@@ -805,7 +794,7 @@
       addUserMsg(val);
       
       setTimeout(() => {
-        addBotMsg(`Excellent choice! Based on your preference, your signature scent is <b class="text-gold-400">${product.name}</b> (${product.size}).<br><br><i>${product.desc}</i><br><br>Price: <b class="text-gold-400">₹${product.price}</b> (Pre-book for just ₹200)`, [
+        addBotMsg(`Excellent choice! Based on your preference, your signature scent is <b class="text-gold-400">${product.name}</b> (${product.size}).<br><br><i>${product.desc}</i><br><br>Reserve it now for just <b class="text-gold-400">₹200</b>! (Final price revealed at launch)`, [
           { text: `Add ${product.name} to Cart`, value: 'add_' + product.id },
           { text: 'Start Over', value: 'restart' }
         ]);
