@@ -1,808 +1,1200 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Suvas — A Parampara of Purity</title>
-  <link rel="icon" type="image/png" href="https://z-cdn-media.chatglm.cn/files/896c4d8a-181b-404c-b427-d9df410065c4.png?auth_key=1886209471-024a2e3bc9924098a6fdc6d6d0d3d14d-0-7ac3464b09e63ef681f8eef52ce3c692">
+  <link rel="icon" type="image/png" href="https://z-cdn-media.chatglm.cn/files/446440fc-504f-4109-ba00-5720dc1ed85d.png?auth_key=1884197723-b2ae75c0f6a1447a9461ae9f82d9f91c-0-186d1b22ea4c29dc90d812ece38a787d">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Plus+Jakarta+Sans:wght@300..700&display=swap" rel="stylesheet">
-  
+  <script>
+/* ---------- icons + logo fallback (bottles use inline SVG, no <img>) ---------- */
+(function(){
+  var I={
+   x:'<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',plus:'<path d="M5 12h14"/><path d="M12 5v14"/>',minus:'<path d="M5 12h14"/>',
+   menu:'<path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/>',
+   'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>','chevron-left':'<path d="m15 18-6-6 6-6"/>','chevron-right':'<path d="m9 18 6-6-6-6"/>',
+   send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+   sparkles:'<path d="M9.9 15.5A2 2 0 0 0 8.5 14.1l-6.1-1.6a.5.5 0 0 1 0-1l6.1-1.6A2 2 0 0 0 9.9 8.5l1.6-6.1a.5.5 0 0 1 1 0l1.6 6.1a2 2 0 0 0 1.4 1.4l6.1 1.6a.5.5 0 0 1 0 1l-6.1 1.6a2 2 0 0 0-1.4 1.4l-1.6 6.1a.5.5 0 0 1-1 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
+   truck:'<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.7a1 1 0 0 0-.2-.6l-3.5-4.4A1 1 0 0 0 17.5 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>',
+   leaf:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/>',
+   'external-link':'<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+   'shopping-bag':'<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+   package:'<path d="m7.5 4.3 9 5.2"/><path d="M21 8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
+   'shield-check':'<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.5 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+   phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>',
+   'map-pin':'<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+   instagram:'<rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4z"/><path d="M17.5 6.5h.01"/>',
+   facebook:'<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
+   'hand-heart':'<path d="M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"/><path d="m7 20 1.6 1.4c.3.4.8.6 1.4.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 15 6 6"/><path d="M19.5 8.5c.7-.7 1.5-1.6 1.5-2.7A2.73 2.73 0 0 0 16 4a2.78 2.78 0 0 0-5 1.8c0 1.2.8 2 1.5 2.8L16 12Z"/>',
+   droplets:'<path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/>',
+   award:'<path d="m15.48 12.89 1.52 8.53a.5.5 0 0 1-.81.47l-3.58-2.69a1 1 0 0 0-1.2 0l-3.58 2.69a.5.5 0 0 1-.81-.47l1.51-8.53"/><circle cx="12" cy="8" r="6"/>',
+   'check-circle':'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>','alert-circle':'<circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>',
+   heart:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+   mail:'<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+   clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+   trash:'<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/>'
+  };
+  var FILL={
+   whatsapp:'<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>'
+  };
+  function swap(el){var n=(el.getAttribute('data-icon')||'').replace('lucide:','');
+    var c=(el.getAttribute('class')||'').replace('iconify','').trim();
+    if(FILL[n]){el.outerHTML='<svg class="inline-block shrink-0 '+c+'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'+FILL[n]+'</svg>';return;}
+    var d=I[n];if(!d)return;
+    el.outerHTML='<svg class="inline-block shrink-0 '+c+'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';}
+  function sweep(){document.querySelectorAll('.iconify[data-icon]').forEach(swap);}
+  new MutationObserver(sweep).observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('DOMContentLoaded',sweep);
+
+  var LOGO='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#3d0811" stroke="#D4A843" stroke-width="3"/><text x="32" y="43" text-anchor="middle" font-family="Georgia,serif" font-size="32" font-weight="700" fill="#D4A843">S</text></svg>');
+  function imgFail(t){
+    if(t.dataset.fbDone)return;t.dataset.fbDone='1';
+    if(t.dataset.bottle!==undefined&&window.BOTTLE_ART){
+      var p=t.closest('.bottle-media');
+      if(p){p.innerHTML='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">'+(window.BOTTLE_ART[t.dataset.bottle]||window.BOTTLE_ART[12])+'</div>';return;}
+    }
+    if((t.alt||'').indexOf('Suvas')>-1){t.src=LOGO;return;}
+    t.style.visibility='hidden';
+  }
+  window.addEventListener('error',function(e){if(e.target&&e.target.tagName==='IMG')imgFail(e.target);},true);
+  window.addEventListener('load',function(){document.querySelectorAll('img').forEach(function(i){if(i.getAttribute('src')&&i.complete&&i.naturalWidth===0)imgFail(i);});});
+})();
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            maroon: { 950: '#0f0205', 900: '#1c050a', 800: '#2e0810', 700: '#4a0b14', 600: '#73101f' },
-            gold: { 500: '#D4A843', 400: '#E5C158', 300: '#F3D97F', 600: '#B58B2F' },
-            cream: { 50: '#FFFDF7', 100: '#FFF8E7', 200: '#F7EBCB' }
+            maroon: { 50:'#fdf2f4', 100:'#fce7eb', 200:'#f9d0d9', 300:'#f4a8b8', 400:'#ed7693', 500:'#e04a6f', 600:'#c62a54', 700:'#a31d43', 800:'#8b1a3a', 900:'#6B0F1A', 950:'#3d0811' },
+            gold: { 50:'#fdf9ed', 100:'#f9eece', 200:'#f3dc9a', 300:'#ecca65', 400:'#e0b63e', 500:'#D4A843', 600:'#b8882e', 700:'#966625', 800:'#7a5124', 900:'#654322', 950:'#3a2311' },
+            cream: { 50:'#FFFDF7', 100:'#FFF8E7', 200:'#FFF0CC' }
           },
           fontFamily: {
             display: ['Playfair Display', 'serif'],
             body: ['Cormorant Garamond', 'serif'],
-            sans: ['Plus Jakarta Sans', 'sans-serif']
+            sans: ['Inter', 'sans-serif']
           }
         }
       }
     }
   </script>
-
   <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0f0205; }
-    ::-webkit-scrollbar-thumb { background: #D4A843; border-radius: 3px; }
+    html { scroll-behavior: smooth; overflow-x:hidden; }
+    body { font-family: 'Cormorant Garamond', serif; }
+    section[id] { scroll-margin-top: 84px; }
+    .ornament { display:flex; align-items:center; justify-content:center; gap:12px; }
+    .ornament::before, .ornament::after { content:''; height:1px; width:80px; background:linear-gradient(to right, transparent, #D4A843, transparent); }
+    .reveal { opacity:0; transform:translateY(30px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .ornate-border { border: 2px solid #D4A843; position: relative; }
+    .ornate-border::before { content:''; position:absolute; inset:4px; border:1px solid rgba(212,168,67,0.4); pointer-events:none; border-radius:inherit; }
+    .product-card { transition: all 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .product-card:hover { transform: translateY(-8px); }
+    .product-card:hover .bottle-media svg { transform: scale(1.06); }
+    ::-webkit-scrollbar { width:8px; }
+    ::-webkit-scrollbar-track { background:#1A0508; }
+    ::-webkit-scrollbar-thumb { background:#D4A843; border-radius:4px; }
+    @keyframes slideIn { from { transform:translateX(100%); opacity:0; } to { transform:translateX(0); opacity:1; } }
+    @keyframes slideOut { from { transform:translateX(0); opacity:1; } to { transform:translateX(100%); opacity:0; } }
+    .toast-in { animation: slideIn 0.4s ease-out forwards; }
+    .toast-out { animation: slideOut 0.4s ease-in forwards; }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-4px; left:50%; width:0; height:2px; background:#D4A843; transition:all 0.3s ease; transform:translateX(-50%); }
+    .nav-link:hover::after, .nav-link.active::after { width:100%; }
+    .video-wrapper { position:relative; padding-bottom:177%; height:0; overflow:hidden; border-radius:12px; }
+    .video-wrapper iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:12px; }
+    .mobile-menu { transform:translateX(100%); transition:transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .mobile-menu.open { transform:translateX(0); }
+    .hero-carousel { position:relative; width:100%; height:100vh; min-height:600px; overflow:hidden; }
+    .hero-slide { position:absolute; inset:0; opacity:0; transition: opacity 1.2s ease-in-out; z-index:0; background:radial-gradient(ellipse at 70% 40%,#6B0F1A,#1A0508); }
+    .hero-slide.active { opacity:1; z-index:1; }
+    .hero-slide .slide-bg { width:100%; height:100%; object-fit:cover; }
+    .hero-slide .overlay { position:absolute; inset:0; }
+    .hero-slide .slide-title { opacity:0; transform:translateY(35px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s; }
+    .hero-slide.active .slide-title { opacity:1; transform:translateY(0); }
+    .hero-slide .slide-cta { opacity:0; transform:translateY(25px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s; }
+    .hero-slide.active .slide-cta { opacity:1; transform:translateY(0); }
+    .carousel-progress { position:absolute; bottom:0; left:0; height:3px; background:#D4A843; z-index:10; transition:width 0.1s linear; }
+    .hero-dot { width:12px; height:12px; border-radius:50%; border:1.5px solid rgba(212,168,67,0.5); background:transparent; transition:all 0.4s; cursor:pointer; position:relative; }
+    .hero-dot.active { border-color:#D4A843; }
+    .hero-dot.active::after { content:''; position:absolute; inset:3px; border-radius:50%; background:#D4A843; }
+    .modal-overlay { opacity:0; pointer-events:none; transition:opacity 0.4s; }
+    .modal-overlay.open { opacity:1; pointer-events:auto; }
+    .modal-content { transform:scale(0.95) translateY(20px); transition:transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .modal-overlay.open .modal-content { transform:scale(1) translateY(0); }
+    .qty-btn { width:32px; height:32px; border-radius:50%; border:1px solid rgba(212,168,67,0.3); display:flex; align-items:center; justify-content:center; color:#D4A843; transition:all 0.2s; cursor:pointer; flex-shrink:0; }
+    .qty-btn:hover { background:rgba(212,168,67,0.15); border-color:#D4A843; }
+    .whatsapp-float { animation: pulse-glow 2s infinite; }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); } 50% { box-shadow: 0 0 20px 8px rgba(37,211,102,0.2); } }
+    @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    .marquee-track { animation: marquee 30s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    .product-bg { background: radial-gradient(ellipse at center, rgba(212,168,67,0.08) 0%, transparent 70%); }
 
-    /* Custom Smooth Dot Cursor */
-    @media (pointer: fine) {
-      body { cursor: none; }
-      a, button, input, select, textarea, label, .interactive { cursor: none !important; }
-    }
-    #cursor-dot {
-      position: fixed; top: 0; left: 0; width: 8px; height: 8px;
-      background-color: #D4A843; border-radius: 50%; pointer-events: none;
-      z-index: 9999; margin: -4px 0 0 -4px; 
-      transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, margin 0.3s ease;
-      will-change: transform;
-    }
-    #cursor-ring {
-      position: fixed; top: 0; left: 0; width: 36px; height: 36px;
-      border: 1px solid rgba(212, 168, 67, 0.5); border-radius: 50%; pointer-events: none;
-      z-index: 9998; margin: -18px 0 0 -18px;
-      will-change: transform;
-    }
-    body.hovered #cursor-dot { 
-      width: 14px; height: 14px; margin: -7px 0 0 -7px; 
-      background-color: #E5C158; 
-    }
+    .size-chip { padding:6px 12px; border-radius:9999px; border:1px solid rgba(212,168,67,0.3); font-family:'Inter',sans-serif; font-size:12px; font-weight:500; color:#ecca65; background:transparent; transition:all .25s; cursor:pointer; }
+    .size-chip:hover { border-color:#D4A843; background:rgba(212,168,67,0.12); }
+    .size-chip.active { background:#D4A843; color:#3d0811; border-color:#D4A843; font-weight:700; }
 
-    /* Gold Shimmer & Glassmorphism */
-    .gold-shimmer {
-      background: linear-gradient(90deg, #D4A843, #FFF8E7, #D4A843, #B58B2F, #D4A843);
-      background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      animation: shimmer 5s linear infinite;
-    }
-    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-    
-    .glass-card {
-      background: rgba(28, 5, 10, 0.65);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(212, 168, 67, 0.18);
-    }
+    @keyframes blink { 0%,80%,100%{opacity:.25; transform:translateY(0)} 40%{opacity:1; transform:translateY(-3px)} }
+    @keyframes msgIn { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+    .typing span { display:inline-block; width:7px; height:7px; margin:0 2px; border-radius:50%; background:#D4A843; animation:blink 1.2s infinite; }
+    .typing span:nth-child(2){ animation-delay:.2s } .typing span:nth-child(3){ animation-delay:.4s }
 
-    .ornate-border {
-      position: relative; border: 1px solid rgba(212,168,67,0.3);
-    }
-    .ornate-border::after {
-      content: ''; position: absolute; inset: 4px; border: 1px solid rgba(212,168,67,0.15); pointer-events: none;
-    }
+    /* ---- bottle artwork container (inline SVG — cannot fail) ---- */
+    .bottle-media { width:100%; height:100%; display:flex; align-items:center; justify-content:center; transition:opacity .2s ease; }
+    .bottle-media svg { height:94%; width:auto; max-width:100%; filter:drop-shadow(0 10px 16px rgba(0,0,0,.5)); transition:transform .6s cubic-bezier(0.16,1,0.3,1); }
+    .bottle-media img { width:100%; height:100%; object-fit:cover; }
+    #pm-media, .g-img, .cart-thumb { transition:opacity .2s ease; }
+    .cart-thumb svg { height:100%; }
 
-    /* Page Navigation Views */
-    .view-page { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
-    .view-page.active-view { display: block; opacity: 1; }
+    /* ---- Scent Guide chat ---- */
+    #guide-panel { position:fixed; z-index:80; inset:0; height:100vh; height:100dvh; display:flex; flex-direction:column; background:radial-gradient(120% 55% at 50% 0%,#5a0f1a 0%,#2a060c 55%,#1a0508 100%); opacity:0; visibility:hidden; pointer-events:none; transform:translateY(24px); transition:opacity .25s, transform .35s cubic-bezier(.16,1,.3,1), visibility 0s linear .35s; }
+    #guide-panel.open { opacity:1; visibility:visible; pointer-events:auto; transform:none; transition-delay:0s; }
+    @media (min-width:640px) {
+      #guide-panel { inset:auto; left:24px; bottom:96px; width:420px; height:min(680px, calc(100vh - 120px)); border-radius:24px; border:1px solid rgba(212,168,67,.4); box-shadow:0 30px 80px rgba(0,0,0,.6); overflow:hidden; transform:translateY(16px) scale(.97); transform-origin:bottom left; }
+      #guide-panel.open { transform:none; }
+    }
+    @media (min-width:1024px) { #guide-panel { width:440px; left:32px; bottom:104px; } }
+    @media (max-width:639px) { body.guide-open { overflow:hidden; } body.guide-open #guide-btn, body.guide-open .whatsapp-float, body.guide-open #guide-nudge { display:none; } #guide-btn span.lbl { display:none; } #guide-btn { padding:14px; } }
+    .g-head { display:flex; align-items:center; gap:12px; padding:14px; padding-top:calc(14px + env(safe-area-inset-top,0px)); background:linear-gradient(90deg,#1a0508,#3d0811); border-bottom:1px solid rgba(212,168,67,.25); }
+    @media (min-width:640px){ .g-head { padding-top:14px; } }
+    .g-av { position:relative; width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,#f5e6a3,#b8882e); display:flex; align-items:center; justify-content:center; color:#3d0811; font-family:'Playfair Display',serif; font-weight:700; font-size:20px; flex-shrink:0; }
+    .g-av i { position:absolute; right:-1px; bottom:-1px; width:12px; height:12px; border-radius:50%; background:#25D366; border:2px solid #1a0508; }
+    .g-iconbtn { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#ecca65; background:rgba(212,168,67,.08); border:1px solid rgba(212,168,67,.2); flex-shrink:0; cursor:pointer; }
+    .g-iconbtn:hover { background:rgba(212,168,67,.2); }
+    #guide-msgs { flex:1; min-height:0; overflow-y:auto; padding:18px 14px; display:flex; flex-direction:column; gap:14px; scroll-behavior:smooth; overscroll-behavior:contain; }
+    .g-row { display:flex; gap:8px; align-items:flex-end; animation:msgIn .35s ease-out; }
+    .g-row.user { justify-content:flex-end; }
+    .g-mini { width:28px; height:28px; border-radius:50%; flex-shrink:0; background:linear-gradient(135deg,#f5e6a3,#b8882e); color:#3d0811; font:700 14px 'Playfair Display',serif; display:flex; align-items:center; justify-content:center; }
+    .g-bubble { max-width:calc(100% - 38px); padding:11px 14px; border-radius:18px; font-family:'Inter',sans-serif; font-size:14px; line-height:1.55; word-wrap:break-word; }
+    .g-row.bot .g-bubble { background:rgba(255,248,231,.07); border:1px solid rgba(212,168,67,.2); color:#FFF8E7; border-bottom-left-radius:6px; }
+    .g-row.user .g-bubble { background:linear-gradient(135deg,#ecca65,#D4A843); color:#3d0811; font-weight:500; border-bottom-right-radius:6px; max-width:85%; }
+    .g-bubble.wide { width:calc(100% - 38px); }
+    .g-card { margin-top:12px; padding:12px; border-radius:16px; background:rgba(26,5,8,.65); border:1px solid rgba(212,168,67,.3); }
+    .g-top { display:flex; gap:12px; align-items:center; }
+    .g-img { width:72px; height:88px; flex-shrink:0; border-radius:12px; overflow:hidden; background:radial-gradient(circle at 50% 40%,rgba(212,168,67,.25),transparent 70%); }
+    .g-img .bottle-media svg { height:100%; }
+    .g-cat { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#D4A843; }
+    .g-name { font:600 22px/1.1 'Playfair Display',serif; color:#FFFDF7; margin:2px 0 8px; }
+    .g-match { display:flex; align-items:center; gap:8px; font-size:11px; color:#ecca65; font-weight:600; white-space:nowrap; }
+    .g-match div { flex:1; height:6px; border-radius:9999px; background:#3d0811; overflow:hidden; } .g-match b { display:block; height:100%; background:linear-gradient(90deg,#b8882e,#f5e6a3); border-radius:9999px; }
+    .g-tip { margin:12px 0 8px; font-size:12px; color:rgba(255,248,231,.6); line-height:1.45; }
+    .g-sizes { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+    .g-sizes .size-chip { padding:8px 0; text-align:center; }
+    .g-prow { display:flex; align-items:baseline; justify-content:space-between; margin:12px 0 10px; }
+    .g-btns { display:flex; gap:8px; }
+    .g-btn { flex:1; padding:10px 8px; border-radius:9999px; font:600 13px 'Inter',sans-serif; text-align:center; transition:all .2s; cursor:pointer; border:none; }
+    .g-btn.ghost { border:1px solid rgba(212,168,67,.5); color:#ecca65; background:transparent; } .g-btn.ghost:hover { background:rgba(212,168,67,.12); }
+    .g-btn.solid { background:#D4A843; color:#3d0811; } .g-btn.solid:hover { background:#ecca65; }
+    #guide-chips { display:flex; flex-wrap:wrap; gap:8px; overflow-y:auto; max-height:104px; padding:6px 14px 10px; flex-shrink:0; }
+    #guide-chips:empty { display:none; }
+    .guide-chip { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; padding:9px 14px; border-radius:9999px; border:1px solid rgba(212,168,67,.4); color:#f3dc9a; font:500 13px 'Inter',sans-serif; background:rgba(212,168,67,.07); transition:all .2s; cursor:pointer; }
+    .guide-chip:hover, .guide-chip:active { background:#D4A843; color:#3d0811; }
+    .g-form { display:flex; gap:10px; padding:12px 14px; padding-bottom:calc(12px + env(safe-area-inset-bottom,0px)); border-top:1px solid rgba(212,168,67,.2); background:#1a0508; flex-shrink:0; }
+    .g-form input { flex:1; min-width:0; font:400 16px 'Inter',sans-serif; color:#FFF8E7; background:rgba(255,248,231,.06); border:1px solid rgba(212,168,67,.25); border-radius:9999px; padding:11px 16px; outline:none; }
+    .g-form input:focus { border-color:rgba(212,168,67,.7); } .g-form input::placeholder { color:rgba(255,248,231,.3); }
+    .g-send { width:46px; height:46px; border-radius:50%; background:#D4A843; color:#3d0811; display:flex; align-items:center; justify-content:center; flex-shrink:0; opacity:.45; transition:all .2s; cursor:pointer; border:none; }
+    .g-send.ready { opacity:1; transform:scale(1.05); }
+    .g-moods { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px; }
+    .g-mood { display:flex; flex-direction:column; align-items:flex-start; gap:2px; text-align:left; padding:11px 12px; border-radius:14px; border:1px solid rgba(212,168,67,.3); background:rgba(212,168,67,.06); transition:all .2s; color:#FFF8E7; min-height:88px; cursor:pointer; }
+    .g-mood:hover, .g-mood:active { background:rgba(212,168,67,.18); border-color:#D4A843; transform:translateY(-2px); }
+    .g-mood b { font:600 13px 'Inter',sans-serif; margin-top:6px; } .g-mood small { font:400 11px 'Inter',sans-serif; color:#D4A843; letter-spacing:.04em; }
+    .g-mi { width:32px; height:32px; border-radius:10px; background:rgba(212,168,67,.15); color:#ecca65; display:flex; align-items:center; justify-content:center; }
+    @media (max-width:380px) { .g-moods { gap:6px; } .g-mood { padding:10px; } }
+    .g-head p:first-child { color:#f3dc9a; font-family:'Playfair Display',serif; font-size:16px; line-height:1.2; } .g-head p + p { color:rgba(255,248,231,.55); font-size:11px; margin-top:2px; }
 
-    /* Marquee animation */
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .animate-marquee {
-      animation: marquee 30s linear infinite;
-    }
+    /* ---- Cart drawer ---- */
+    #cart-drawer { transform:translateX(100%); transition:transform .45s cubic-bezier(.16,1,.3,1); }
+    #cart-drawer.open { transform:translateX(0); }
+    #cart-overlay { opacity:0; pointer-events:none; transition:opacity .35s; }
+    #cart-overlay.open { opacity:1; pointer-events:auto; }
+    body.cart-open, body.modal-open { overflow:hidden; }
+    #navbar.scrolled { background:rgba(26,5,8,.94); backdrop-filter:blur(14px); box-shadow:0 12px 40px rgba(0,0,0,.45); }
+    @keyframes badgePop { 0%{transform:scale(0)} 60%{transform:scale(1.35)} 100%{transform:scale(1)} }
+    .badge-pop { animation:badgePop .4s ease-out; }
+    .field { width:100%; font:400 14px 'Inter',sans-serif; color:#FFF8E7; background:rgba(255,248,231,.06); border:1px solid rgba(212,168,67,.25); border-radius:12px; padding:11px 14px; outline:none; }
+    .field:focus { border-color:rgba(212,168,67,.7); }
+    .field::placeholder { color:rgba(255,248,231,.35); }
+    select.field { appearance:none; background-image:linear-gradient(45deg,transparent 50%,#D4A843 50%),linear-gradient(135deg,#D4A843 50%,transparent 50%); background-position:calc(100% - 18px) 55%,calc(100% - 13px) 55%; background-size:5px 5px; background-repeat:no-repeat; }
+    select.field option { background:#1a0508; color:#FFF8E7; }
 
-    /* AI Bot Pulse Animation */
-    @keyframes pulse-gold {
-      0% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.5); }
-      70% { box-shadow: 0 0 0 15px rgba(212, 168, 67, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0); }
-    }
-    .bot-pulse { animation: pulse-gold 2s infinite; }
+    /* ---- Guide nudge bubble ---- */
+    #guide-nudge { position:fixed; left:24px; bottom:96px; z-index:49; max-width:230px; background:#FFF8E7; color:#3d0811; font:500 12.5px/1.45 'Inter',sans-serif; padding:12px 14px; border-radius:14px 14px 14px 4px; box-shadow:0 12px 30px rgba(0,0,0,.4); opacity:0; transform:translateY(8px); transition:all .4s; pointer-events:none; cursor:pointer; }
+    #guide-nudge.show { opacity:1; transform:none; pointer-events:auto; }
+    @media (max-width:639px) { #guide-nudge { left:16px; bottom:88px; } }
   </style>
 </head>
-<body class="bg-maroon-950 text-cream-50 font-body selection:bg-gold-500 selection:text-maroon-950 min-h-screen flex flex-col">
+<body class="bg-maroon-950 text-cream-50 overflow-x-hidden">
 
-  <!-- Custom Dot Cursor -->
-  <div id="cursor-dot"></div>
-  <div id="cursor-ring"></div>
+  <div id="toast-container" class="fixed top-24 right-4 z-[100] flex flex-col gap-3"></div>
 
-  <!-- Toast Notification Container -->
-  <div id="toast-container" class="fixed top-20 right-6 z-[100] flex flex-col gap-3"></div>
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/919044742251?text=Hi!%20I'm%20interested%20in%20Suvas%20Attars" target="_blank" rel="noopener" class="whatsapp-float fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300" aria-label="Chat on WhatsApp">
+    <span class="iconify w-7 h-7 text-white" data-icon="lucide:whatsapp"></span>
+  </a>
 
-  <!-- TOP PROMO TICKER -->
-  <div class="bg-maroon-900 border-b border-gold-500/10 text-xs font-sans tracking-widest text-gold-400/80 py-2 overflow-hidden relative z-40">
-    <div class="flex gap-12 whitespace-nowrap animate-marquee">
-      <span class="inline-flex items-center gap-2"><span class="iconify" data-icon="lucide:sparkles"></span> Pre-Booking Open! Reserve Your Signature Scent For Just ₹200</span>
-      <span>✦</span>
-      <span class="inline-flex items-center gap-2"><span class="iconify" data-icon="lucide:clock"></span> Deliveries Starting Soon — Book Yours Now</span>
-      <span>✦</span>
-      <span class="inline-flex items-center gap-2"><span class="iconify" data-icon="lucide:package"></span> Premium Crystal Decanter Box Included</span>
-      <span>✦</span>
-      <span class="inline-flex items-center gap-2"><span class="iconify" data-icon="lucide:sparkles"></span> Pre-Booking Open! Reserve Your Signature Scent For Just ₹200</span>
-      <span>✦</span>
-      <span class="inline-flex items-center gap-2"><span class="iconify" data-icon="lucide:clock"></span> Deliveries Starting Soon — Book Yours Now</span>
-      <span>✦</span>
-      <span class="inline-flex items-center gap-2"><span class="iconify" data-icon="lucide:package"></span> Premium Crystal Decanter Box Included</span>
+  <!-- SCENT GUIDE NUDGE + BUTTON -->
+  <div id="guide-nudge" onclick="toggleGuide(true)">Not sure which attar suits you? Let me pick one for you ✨</div>
+  <button id="guide-btn" class="fixed bottom-6 left-6 z-50 flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-600 text-maroon-950 font-sans font-semibold pl-4 pr-5 py-3.5 rounded-full shadow-xl hover:scale-105 transition-transform" onclick="toggleGuide(true)" aria-label="Open Scent Guide">
+    <span class="iconify w-5 h-5" data-icon="lucide:sparkles"></span><span class="lbl">Scent Guide</span>
+  </button>
+
+  <!-- TOP INFO BAR -->
+  <div class="bg-maroon-950 border-b border-gold-500/10 relative z-50">
+    <div class="overflow-hidden">
+      <div class="marquee-track flex items-center whitespace-nowrap py-2">
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:leaf"></span>Organic, Alcohol-Free Traditional Indian Attars</span>
+        <span class="text-gold-500/30">✦</span>
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:truck"></span>Standard Shipping across India — Flat ₹99</span>
+        <span class="text-gold-500/30">✦</span>
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:package"></span>Choose 8 / 10 / 12 / 15 ml · Crystal Decanter Box Pack Included</span>
+        <span class="text-gold-500/30">✦</span>
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:leaf"></span>Organic, Alcohol-Free Traditional Indian Attars</span>
+        <span class="text-gold-500/30">✦</span>
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:truck"></span>Standard Shipping across India — Flat ₹99</span>
+        <span class="text-gold-500/30">✦</span>
+        <span class="inline-flex items-center gap-2 text-xs font-sans text-gold-400/70 mx-8"><span class="iconify w-3.5 h-3.5" data-icon="lucide:package"></span>Choose 8 / 10 / 12 / 15 ml · Crystal Decanter Box Pack Included</span>
+        <span class="text-gold-500/30">✦</span>
+      </div>
     </div>
   </div>
 
-  <!-- MAIN NAVIGATION BAR -->
-  <header id="navbar" class="sticky top-0 z-50 transition-all duration-300 bg-maroon-950/90 backdrop-blur-xl border-b border-gold-500/15">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="#home" onclick="switchView('store')" class="flex items-center gap-3 group">
-        <img src="https://z-cdn-media.chatglm.cn/files/896c4d8a-181b-404c-b427-d9df410065c4.png?auth_key=1886209471-024a2e3bc9924098a6fdc6d6d0d3d14d-0-7ac3464b09e63ef681f8eef52ce3c692" alt="Suvas Logo" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform duration-300">
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="fixed left-0 right-0 z-50 transition-all duration-500" style="top:33px;">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3 group">
+        <img src="https://z-cdn-media.chatglm.cn/files/446440fc-504f-4109-ba00-5720dc1ed85d.png?auth_key=1884197723-b2ae75c0f6a1447a9461ae9f82d9f91c-0-186d1b22ea4c29dc90d812ece38a787d" alt="Suvas Logo" class="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300">
         <div>
-          <span class="font-display text-2xl text-gold-400 tracking-widest leading-none block font-semibold">SUVAS</span>
-          <span class="text-[9px] font-sans text-gold-500/60 tracking-[0.3em] uppercase leading-none block mt-1">A Parampara of Purity</span>
+          <span class="font-display text-xl text-gold-400 tracking-[0.15em] leading-none block">SUVAS</span>
+          <span class="text-[8px] font-sans text-gold-500/50 tracking-[0.3em] uppercase leading-none">A Parampara of Purity</span>
         </div>
       </a>
-
-      <nav class="hidden md:flex items-center gap-8 font-sans text-xs tracking-widest uppercase text-cream-100/70">
-        <button onclick="switchView('store'); scrollToSection('home');" class="hover:text-gold-400 transition-colors">Home</button>
-        <button onclick="switchView('store'); scrollToSection('products');" class="hover:text-gold-400 transition-colors">Collection</button>
-        <button onclick="switchView('store'); scrollToSection('why-us');" class="hover:text-gold-400 transition-colors">Heritage</button>
-        <button onclick="switchView('checkout')" class="hover:text-gold-400 transition-colors">Checkout</button>
-      </nav>
-
-      <div class="flex items-center gap-4">
-        <!-- Cart Trigger Button -->
-        <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-full border border-gold-500/20 bg-maroon-900/50 hover:border-gold-500/50 transition-colors group">
-          <span class="iconify w-5 h-5 text-gold-400 group-hover:scale-110 transition-transform" data-icon="lucide:shopping-bag"></span>
-          <span id="cart-badge-count" class="absolute -top-1 -right-1 bg-gold-500 text-maroon-950 font-sans text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home" class="nav-link text-sm font-sans font-medium text-cream-100/80 hover:text-gold-400 transition-colors">Home</a>
+        <a href="#products" class="nav-link text-sm font-sans font-medium text-cream-100/80 hover:text-gold-400 transition-colors">Shop Fragrances</a>
+        <a href="#videos" class="nav-link text-sm font-sans font-medium text-cream-100/80 hover:text-gold-400 transition-colors">Gallery</a>
+        <a href="#contact" class="nav-link text-sm font-sans font-medium text-cream-100/80 hover:text-gold-400 transition-colors">Contact</a>
+      </div>
+      <div class="hidden md:flex items-center gap-3">
+        <a href="https://wa.me/919044742251?text=Hi!%20I%20want%20to%20order%20Suvas%20Attars" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-[#25D366]/20 flex items-center justify-center hover:bg-[#25D366]/30 transition-colors" aria-label="WhatsApp">
+          <span class="iconify w-4 h-4 text-[#25D366]" data-icon="lucide:whatsapp"></span>
+        </a>
+        <button onclick="openCart()" class="relative w-9 h-9 rounded-full bg-gold-500/10 flex items-center justify-center hover:bg-gold-500/20 transition-colors" aria-label="Open cart">
+          <span class="iconify w-4 h-4 text-gold-400" data-icon="lucide:shopping-bag"></span>
+          <span id="cart-badge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#25D366] text-maroon-950 text-[10px] font-bold flex items-center justify-center">0</span>
         </button>
-
-        <a href="https://wa.me/919044742251" target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-[#25D366] text-white font-sans text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-[#1ebc57] transition-all">
-          <span class="iconify w-4 h-4" data-icon="lucide:message-circle"></span> Direct Order
+        <a href="#products" class="inline-flex items-center gap-2 bg-gold-500 text-maroon-950 font-sans text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/25">
+          <span class="iconify w-4 h-4" data-icon="lucide:shopping-bag"></span>Shop Now
         </a>
       </div>
+      <button id="menu-toggle" class="md:hidden text-gold-400 p-2" aria-label="Open menu"><span class="iconify w-6 h-6" data-icon="lucide:menu"></span></button>
     </div>
-  </header>
+  </nav>
 
-  <!-- STORE VIEW (HOME + CATALOG) -->
-  <main id="view-store" class="view-page active-view flex-1">
-    
-    <!-- HERO SECTION -->
-    <section id="home" class="relative min-h-[85vh] flex items-center justify-center overflow-hidden py-20">
-      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-maroon-800/40 via-maroon-950 to-maroon-950"></div>
-      <div class="relative max-w-5xl mx-auto px-6 text-center">
-        <span class="inline-block text-xs font-sans text-gold-400 tracking-[0.3em] uppercase mb-4 px-4 py-1.5 rounded-full border border-gold-500/20 bg-gold-500/5">Handcrafted Perfumery of Banaras</span>
-        <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-tight text-cream-50 mt-2">
-          Every drop tells a story.<br><span class="gold-shimmer">Wear yours with grace.</span>
-        </h1>
-        <p class="mt-6 font-body text-xl text-cream-100/60 max-w-2xl mx-auto leading-relaxed">
-          Authentic, alcohol-free artisanal attars hydro-distilled from natural botanicals, aged to perfection in crystal decanters.
-        </p>
-        <div class="mt-10 flex flex-wrap items-center justify-center gap-5 font-sans">
-          <button onclick="scrollToSection('products')" class="bg-gold-500 text-maroon-950 font-semibold text-sm px-8 py-4 rounded-full hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20 hover:scale-105">
-            Explore Collection
-          </button>
-          <button onclick="switchView('checkout')" class="border border-gold-500/40 text-gold-400 font-semibold text-sm px-8 py-4 rounded-full hover:bg-gold-500/10 transition-all">
-            Direct Checkout
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRODUCTS CATALOG SECTION -->
-    <section id="products" class="py-24 max-w-7xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Artisanal Blends</span>
-        <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50 mt-2">The Signature <span class="text-gold-400">Collection</span></h2>
-        <p class="mt-3 font-body text-lg text-cream-100/50">Reserve Your Scent — Pre-Booking Phase Active</p>
-        <p class="mt-2 text-xs font-sans text-gold-400/80 italic">* Final price will be revealed at launch. Secure your bottle for just ₹200.</p>
-
-        <!-- Category Filters -->
-        <div class="mt-8 flex flex-wrap justify-center gap-3 font-sans text-xs uppercase tracking-wider">
-          <button onclick="filterProducts('all')" class="cat-filter-btn active bg-gold-500 text-maroon-950 px-5 py-2 rounded-full font-semibold transition-all">All Fragrances</button>
-          <button onclick="filterProducts('Floral')" class="cat-filter-btn border border-gold-500/20 hover:border-gold-500/60 text-cream-100 px-5 py-2 rounded-full transition-all">Floral</button>
-          <button onclick="filterProducts('Woody')" class="cat-filter-btn border border-gold-500/20 hover:border-gold-500/60 text-cream-100 px-5 py-2 rounded-full transition-all">Woody</button>
-          <button onclick="filterProducts('Musk')" class="cat-filter-btn border border-gold-500/20 hover:border-gold-500/60 text-cream-100 px-5 py-2 rounded-full transition-all">Musk</button>
-          <button onclick="filterProducts('Amber')" class="cat-filter-btn border border-gold-500/20 hover:border-gold-500/60 text-cream-100 px-5 py-2 rounded-full transition-all">Amber</button>
-        </div>
-      </div>
-
-      <!-- Product Grid -->
-      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Dynamically Rendered via JS -->
-      </div>
-    </section>
-
-    <!-- HERITAGE / WHY SUVAS -->
-    <section id="why-us" class="py-20 bg-maroon-900/30 border-y border-gold-500/10">
-      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center">
-        <div class="glass-card p-8 rounded-2xl ornate-border">
-          <div class="w-12 h-12 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-4 text-gold-400">
-            <span class="iconify w-6 h-6" data-icon="lucide:shield-check"></span>
-          </div>
-          <h3 class="font-display text-xl font-bold text-cream-50">100% Organic Purity</h3>
-          <p class="mt-2 font-body text-cream-100/50 text-sm">Strictly zero synthetic chemicals, parabens, or carrier alcohol dilutions.</p>
-        </div>
-        <div class="glass-card p-8 rounded-2xl ornate-border">
-          <div class="w-12 h-12 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-4 text-gold-400">
-            <span class="iconify w-6 h-6" data-icon="lucide:flame"></span>
-          </div>
-          <h3 class="font-display text-xl font-bold text-cream-50">Traditional Deg-Bhapka</h3>
-          <p class="mt-2 font-body text-cream-100/50 text-sm">Steam distilled in copper stills according to century-old Banaras recipes.</p>
-        </div>
-        <div class="glass-card p-8 rounded-2xl ornate-border">
-          <div class="w-12 h-12 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-4 text-gold-400">
-            <span class="iconify w-6 h-6" data-icon="lucide:gift"></span>
-          </div>
-          <h3 class="font-display text-xl font-bold text-cream-50">Royalty Packaging</h3>
-          <p class="mt-2 font-body text-cream-100/50 text-sm">Enclosed in velvet-lined gift boxes and solid glass crystal applicator bottles.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- SEPARATE PURCHASING & CHECKOUT VIEW PAGE -->
-  <main id="view-checkout" class="view-page flex-1 py-12 max-w-6xl mx-auto px-6 w-full">
-    <div class="mb-8 flex items-center justify-between border-b border-gold-500/15 pb-6">
-      <div>
-        <button onclick="switchView('store')" class="text-xs font-sans text-gold-400 flex items-center gap-2 mb-2 hover:underline">
-          <span class="iconify" data-icon="lucide:arrow-left"></span> Back to Fragrance Store
-        </button>
-        <h1 class="font-display text-4xl font-bold text-cream-50">Pre-Booking & Checkout</h1>
-      </div>
-      <div class="font-sans text-xs text-gold-500 uppercase tracking-widest bg-gold-500/10 px-4 py-2 rounded-full border border-gold-500/20">
-        Reserve Express Order
-      </div>
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] bg-maroon-950/98 backdrop-blur-lg">
+    <div class="flex items-center justify-between p-6">
+      <img src="https://z-cdn-media.chatglm.cn/files/446440fc-504f-4109-ba00-5720dc1ed85d.png?auth_key=1884197723-b2ae75c0f6a1447a9461ae9f82d9f91c-0-186d1b22ea4c29dc90d812ece38a787d" alt="Suvas" class="w-8 h-8 object-contain">
+      <button id="menu-close" class="text-gold-400 p-2" aria-label="Close menu"><span class="iconify w-7 h-7" data-icon="lucide:x"></span></button>
     </div>
-
-    <div class="grid lg:grid-cols-12 gap-10">
-      <!-- Order Selection & Form -->
-      <div class="lg:col-span-7 space-y-6">
-        <!-- Customer Details -->
-        <div class="glass-card p-6 rounded-2xl ornate-border">
-          <h2 class="font-display text-2xl font-semibold text-gold-400 mb-4 flex items-center gap-2">
-            <span class="iconify w-5 h-5" data-icon="lucide:user"></span> 1. Delivery Details
-          </h2>
-          <form id="checkout-form" class="space-y-4 font-sans text-sm">
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs uppercase text-gold-400/80 mb-1">Full Name *</label>
-                <input type="text" id="cust-name" required placeholder="e.g. Aditi Sharma" class="w-full bg-maroon-950 border border-gold-500/20 rounded-lg px-4 py-3 text-cream-50 focus:border-gold-500 focus:outline-none">
-              </div>
-              <div>
-                <label class="block text-xs uppercase text-gold-400/80 mb-1">WhatsApp Number *</label>
-                <input type="tel" id="cust-phone" required placeholder="+91 98765 43210" class="w-full bg-maroon-950 border border-gold-500/20 rounded-lg px-4 py-3 text-cream-50 focus:border-gold-500 focus:outline-none">
-              </div>
-            </div>
-            <div>
-              <label class="block text-xs uppercase text-gold-400/80 mb-1">Full Delivery Address *</label>
-              <textarea id="cust-address" required rows="3" placeholder="House/Flat No., Street, City, State, Pincode" class="w-full bg-maroon-950 border border-gold-500/20 rounded-lg px-4 py-3 text-cream-50 focus:border-gold-500 focus:outline-none"></textarea>
-            </div>
-            <div>
-              <label class="block text-xs uppercase text-gold-400/80 mb-1">Special Order Note (Optional)</label>
-              <input type="text" id="cust-notes" placeholder="Gift message, custom packing preferences..." class="w-full bg-maroon-950 border border-gold-500/20 rounded-lg px-4 py-3 text-cream-50 focus:border-gold-500 focus:outline-none">
-            </div>
-          </form>
-        </div>
-
-        <!-- Payment Method Selection -->
-        <div class="glass-card p-6 rounded-2xl ornate-border font-sans">
-          <h2 class="font-display text-2xl font-semibold text-gold-400 mb-4 flex items-center gap-2">
-            <span class="iconify w-5 h-5" data-icon="lucide:credit-card"></span> 2. Payment Method
-          </h2>
-          <div class="space-y-3">
-            <label class="flex items-center gap-3 p-4 border border-gold-500/30 rounded-xl bg-gold-500/5 cursor-pointer">
-              <input type="radio" name="payment-method" value="WhatsApp UPI / Order" checked class="accent-gold-500">
-              <div>
-                <p class="font-semibold text-cream-50">Instant WhatsApp & UPI Payment</p>
-                <p class="text-xs text-cream-100/50">Confirm booking details via WhatsApp and pay seamlessly using GPay / PhonePe / Paytm.</p>
-              </div>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Order Summary Column -->
-      <div class="lg:col-span-5">
-        <div class="glass-card p-6 rounded-2xl ornate-border sticky top-28 font-sans">
-          <h2 class="font-display text-2xl font-semibold text-cream-50 mb-4 border-b border-gold-500/15 pb-3">Booking Summary</h2>
-          
-          <div id="checkout-cart-items" class="divide-y divide-gold-500/10 max-h-60 overflow-y-auto pr-2">
-            <!-- Rendered dynamically -->
-          </div>
-
-          <div class="mt-6 pt-4 border-t border-gold-500/15 space-y-2 text-sm">
-            <div class="flex justify-between text-lg font-bold text-gold-400">
-              <span>Pre-Booking Amount (Pay Now)</span>
-              <span id="summary-total">₹0</span>
-            </div>
-          </div>
-
-          <div class="mt-4 p-3 bg-maroon-800/50 rounded-lg border border-gold-500/10 text-xs text-cream-100/60 flex items-start gap-2">
-            <span class="iconify text-gold-400 mt-0.5" data-icon="lucide:info"></span>
-            <span>Final price will be shown after launch. You are only paying the pre-booking token amount now.</span>
-          </div>
-
-          <button onclick="submitOrder()" class="mt-6 w-full bg-gold-500 hover:bg-gold-400 text-maroon-950 font-bold py-4 rounded-xl transition-all shadow-lg shadow-gold-500/20 flex items-center justify-center gap-2 text-base">
-            <span class="iconify w-5 h-5" data-icon="lucide:check-circle"></span> Reserve via WhatsApp
-          </button>
-          
-          <p class="text-[11px] text-center text-cream-100/40 mt-3">🔒 Pre-Booking Active. Deliveries start soon!</p>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- SIDE CART DRAWER (SLIDE-OVER) -->
-  <div id="cart-drawer" class="fixed inset-0 z-[80] pointer-events-none">
-    <div id="cart-backdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-maroon-950/80 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
-    <div id="cart-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-maroon-900 border-l border-gold-500/20 shadow-2xl transform translate-x-full transition-transform duration-300 pointer-events-auto flex flex-col">
-      <div class="p-6 border-b border-gold-500/15 flex items-center justify-between">
-        <h3 class="font-display text-2xl font-bold text-cream-50 flex items-center gap-2">
-          <span class="iconify text-gold-400" data-icon="lucide:shopping-bag"></span> Your Cart
-        </h3>
-        <button onclick="toggleCartDrawer()" class="text-cream-100/60 hover:text-gold-400 p-2">
-          <span class="iconify w-6 h-6" data-icon="lucide:x"></span>
-        </button>
-      </div>
-
-      <div id="drawer-cart-items" class="flex-1 overflow-y-auto p-6 space-y-4 divide-y divide-gold-500/10">
-        <!-- Rendered via JS -->
-      </div>
-
-      <div class="p-6 border-t border-gold-500/15 bg-maroon-950/50 font-sans">
-        <div class="flex justify-between items-center text-lg font-bold text-gold-400 mb-4">
-          <span>Total Pre-Booking:</span>
-          <span id="drawer-total-price">₹0</span>
-        </div>
-        <button onclick="toggleCartDrawer(); switchView('checkout');" class="w-full bg-gold-500 hover:bg-gold-400 text-maroon-950 font-bold py-3.5 rounded-xl transition-all">
-          Proceed to Pre-Booking
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PRODUCT DETAIL MODAL -->
-  <div id="product-modal" class="fixed inset-0 z-[90] bg-maroon-950/85 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="glass-card max-w-2xl w-full rounded-2xl ornate-border overflow-hidden relative p-8">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-cream-100/60 hover:text-gold-400 p-2">
-        <span class="iconify w-6 h-6" data-icon="lucide:x"></span>
+    <div class="flex flex-col items-center gap-8 mt-12">
+      <a href="#home" class="mobile-link font-display text-3xl text-cream-100 hover:text-gold-400 transition-colors">Home</a>
+      <a href="#products" class="mobile-link font-display text-3xl text-cream-100 hover:text-gold-400 transition-colors">Shop Fragrances</a>
+      <a href="#videos" class="mobile-link font-display text-3xl text-cream-100 hover:text-gold-400 transition-colors">Gallery</a>
+      <a href="#contact" class="mobile-link font-display text-3xl text-cream-100 hover:text-gold-400 transition-colors">Contact</a>
+      <button onclick="closeMenu();openCart();" class="mobile-link mt-2 inline-flex items-center gap-2 border border-gold-500/40 text-gold-400 font-sans font-semibold px-8 py-3 rounded-full hover:bg-gold-500/10">
+        <span class="iconify w-5 h-5" data-icon="lucide:shopping-bag"></span>View Cart
       </button>
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <img id="modal-img" src="" alt="" class="w-full h-64 object-contain rounded-xl bg-gold-500/5 p-4">
-        <div>
-          <span id="modal-category" class="text-xs font-sans text-gold-400 uppercase tracking-widest"></span>
-          <h3 id="modal-title" class="font-display text-3xl font-bold text-cream-50 mt-1"></h3>
-          <p id="modal-price" class="font-display text-2xl font-bold text-gold-400 mt-2"></p>
-          <p id="modal-desc" class="font-body text-cream-100/60 text-base mt-4 leading-relaxed"></p>
-          <p class="font-sans text-[11px] text-gold-400/80 mt-2 italic">* Final price will be revealed at launch.</p>
-          
-          <div class="mt-6 flex items-center gap-4">
-            <button onclick="addToCartFromModal()" class="flex-1 bg-gold-500 text-maroon-950 font-sans font-semibold py-3 rounded-xl hover:bg-gold-400 transition-all">
-              Add to Cart
-            </button>
+      <a href="https://wa.me/919044742251?text=Hi!%20I%20want%20to%20order%20Suvas%20Attars" target="_blank" rel="noopener" class="mobile-link mt-2 inline-flex items-center gap-2 bg-[#25D366] text-white font-sans font-semibold px-8 py-3 rounded-full">
+        <span class="iconify w-5 h-5" data-icon="lucide:whatsapp"></span>Order on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- HERO CAROUSEL -->
+  <section id="home" class="hero-carousel">
+    <div class="hero-slide active" data-slide="0">
+      <img src="https://z-cdn-media.chatglm.cn/files/3ab1df2e-757f-4803-a789-73d08a606372.png?auth_key=1884203050-779270fb39574e1cb6cc3570d1b32adf-0-90ffdc7c98dd59a315b4e2a6323729a4" alt="Suvas Attars" class="slide-bg">
+      <div class="overlay bg-gradient-to-r from-maroon-950/90 via-maroon-950/60 to-transparent"></div>
+      <div class="absolute inset-0 flex items-center z-10">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+          <div class="max-w-xl">
+            <h2 class="slide-title font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-cream-50 leading-[1.08]">
+              Every drop of attar tells a story.<br><span class="text-gold-400">Wear yours with grace.</span>
+            </h2>
+            <div class="slide-cta mt-9 flex items-center gap-4 flex-wrap">
+              <a href="#products" class="inline-flex items-center gap-2 bg-gold-500 text-maroon-950 font-sans font-semibold px-8 py-4 rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/25 hover:scale-105">
+                Shop Fragrances <span class="iconify w-4 h-4" data-icon="lucide:arrow-right"></span>
+              </a>
+              <a href="#contact" class="inline-flex items-center gap-2 text-gold-400 font-sans text-sm font-medium hover:text-gold-300 transition-colors group">
+                Contact Us <span class="iconify w-4 h-4 group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right"></span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- AI SCENT FINDER BOT -->
-  <div id="bot-button" onclick="toggleBot()" class="fixed bottom-6 right-6 z-[95] bg-gold-500 text-maroon-950 rounded-full w-16 h-16 flex items-center justify-center shadow-xl hover:bg-gold-400 transition-transform hover:scale-110 bot-pulse cursor-none">
-    <span class="iconify w-7 h-7" data-icon="lucide:sparkles"></span>
-  </div>
-
-  <div id="bot-window" class="fixed bottom-24 right-6 z-[95] w-[92%] max-w-sm bg-maroon-900 border border-gold-500/20 rounded-2xl shadow-2xl hidden flex-col overflow-hidden">
-    <div class="bg-maroon-800 p-4 flex items-center justify-between border-b border-gold-500/15">
-      <h3 class="font-display text-lg text-gold-400 flex items-center gap-2">
-        <span class="iconify" data-icon="lucide:sparkles"></span> Scent Finder AI
-      </h3>
-      <button onclick="toggleBot()" class="text-cream-100/60 hover:text-gold-400 p-1">
-        <span class="iconify w-5 h-5" data-icon="lucide:x"></span>
-      </button>
+    <div class="hero-slide" data-slide="1">
+      <img src="https://z-cdn-media.chatglm.cn/files/d6234a6b-04c8-4cc8-9ddc-d78b1882e227.png?auth_key=1884203050-a29682abc4784c798bcddc7a63ee1c83-0-9857f1f1c788b5df937cc447bd2f1bf5" alt="Suvas Attars" class="slide-bg">
+      <div class="overlay bg-gradient-to-r from-maroon-950/90 via-maroon-950/60 to-transparent"></div>
+      <div class="absolute inset-0 flex items-center z-10">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+          <div class="max-w-xl">
+            <h2 class="slide-title font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-cream-50 leading-[1.08]">
+              Your signature isn't written—<br><span class="text-gold-400">it's worn.</span>
+            </h2>
+            <div class="slide-cta mt-9 flex items-center gap-4 flex-wrap">
+              <a href="#products" class="inline-flex items-center gap-2 bg-gold-500 text-maroon-950 font-sans font-semibold px-8 py-4 rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/25 hover:scale-105">
+                Explore Collection <span class="iconify w-4 h-4" data-icon="lucide:arrow-right"></span>
+              </a>
+              <a href="https://wa.me/919044742251?text=Hi!%20I%20want%20to%20order%20Suvas%20Attars" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border-2 border-[#25D366]/50 text-[#25D366] font-sans text-sm font-semibold px-6 py-3.5 rounded-full hover:bg-[#25D366]/10 transition-all duration-300">
+                <span class="iconify w-4 h-4" data-icon="lucide:whatsapp"></span>Order on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <div id="bot-chat" class="p-4 h-72 overflow-y-auto space-y-3 font-sans text-sm flex flex-col">
-      <!-- Chat messages will be injected here -->
+    <div class="absolute bottom-8 left-0 right-0 z-10">
+      <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <button class="w-11 h-11 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 hover:bg-gold-500/10 hover:border-gold-500 transition-all" onclick="heroSlide(-1)" aria-label="Previous"><span class="iconify w-5 h-5" data-icon="lucide:chevron-left"></span></button>
+          <button class="w-11 h-11 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 hover:bg-gold-500/10 hover:border-gold-500 transition-all" onclick="heroSlide(1)" aria-label="Next"><span class="iconify w-5 h-5" data-icon="lucide:chevron-right"></span></button>
+          <span class="ml-3 font-sans text-xs text-cream-100/30 tracking-wider"><span id="slide-current" class="text-gold-400">01</span> / 02</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="hero-dot active" data-dot="0" aria-label="Slide 1"></button>
+          <button class="hero-dot" data-dot="1" aria-label="Slide 2"></button>
+        </div>
+      </div>
     </div>
-  </div>
+    <div id="hero-progress" class="carousel-progress" style="width:0%"></div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="relative py-24 md:py-32">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-gold-500/[0.02] to-transparent pointer-events:none"></div>
+    <div class="relative max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <div class="ornament mb-4"><span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Our Collection</span></div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50">Shop <span class="text-gold-400">Fragrances</span></h2>
+        <p class="mt-4 font-body text-lg text-cream-100/50 max-w-xl mx-auto">Four souls of attar — Rasa, Ojas, Aaroh &amp; Vyom — each in the size that suits you</p>
+        <button onclick="toggleGuide(true)" class="mt-6 inline-flex items-center gap-2 border border-gold-500/40 text-gold-400 font-sans text-sm font-medium px-6 py-2.5 rounded-full hover:bg-gold-500 hover:text-maroon-950 transition-all"><span class="iconify w-4 h-4" data-icon="lucide:sparkles"></span>Not sure? Let our Scent Guide pick for you</button>
+      </div>
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+      <div class="reveal text-center mt-14">
+        <p class="font-body text-cream-100/40 mb-4">All attars come in a premium crystal decanter with box pack — pick 8, 10, 12 or 15 ml</p>
+        <button onclick="bulkWhatsApp()" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-sans font-semibold px-10 py-4 rounded-full hover:bg-[#20bd5a] transition-all duration-300 hover:shadow-lg hover:shadow-[#25D366]/25 hover:scale-105">
+          <span class="iconify w-5 h-5" data-icon="lucide:whatsapp"></span>Place Bulk Orders via WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY SUVAS -->
+  <section class="relative py-24 md:py-32 bg-maroon-900/30">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <div class="ornament mb-4"><span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Why Choose Us</span></div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50">The Suvas <span class="text-gold-400">Promise</span></h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="reveal text-center p-8 border border-gold-500/10 rounded-2xl hover:border-gold-500/30 transition-colors duration-500 group"><div class="w-16 h-16 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-5 group-hover:bg-gold-500/20 transition-colors"><span class="iconify w-7 h-7 text-gold-400" data-icon="lucide:shield-check"></span></div><h3 class="font-display text-xl font-semibold text-cream-100 mb-2">Guaranteed Purity</h3><p class="font-body text-cream-100/40">Every attar is lab-tested for purity. No synthetics, no chemicals — just nature's unadulterated essence.</p></div>
+        <div class="reveal text-center p-8 border border-gold-500/10 rounded-2xl hover:border-gold-500/30 transition-colors duration-500 group"><div class="w-16 h-16 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-5 group-hover:bg-gold-500/20 transition-colors"><span class="iconify w-7 h-7 text-gold-400" data-icon="lucide:truck"></span></div><h3 class="font-display text-xl font-semibold text-cream-100 mb-2">Pan-India Delivery</h3><p class="font-body text-cream-100/40">Flat ₹99 shipping on every order across India. Carefully packed, sealed and tracked to your doorstep.</p></div>
+        <div class="reveal text-center p-8 border border-gold-500/10 rounded-2xl hover:border-gold-500/30 transition-colors duration-500 group sm:col-span-2 lg:col-span-1"><div class="w-16 h-16 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-5 group-hover:bg-gold-500/20 transition-colors"><span class="iconify w-7 h-7 text-gold-400" data-icon="lucide:sparkles"></span></div><h3 class="font-display text-xl font-semibold text-cream-100 mb-2">Luxury Packaging</h3><p class="font-body text-cream-100/40">Premium crystal decanter with box pack in 8, 10, 12 or 15 ml — perfect for gifting or personal indulgence.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos" class="relative py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <div class="ornament mb-4"><span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Experience</span></div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50">See the <span class="text-gold-400">Craft</span></h2>
+        <p class="mt-4 font-body text-lg text-cream-100/50 max-w-xl mx-auto">Witness the making and magic of Suvas attars</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        <div class="reveal"><div class="ornate-border rounded-2xl overflow-hidden"><div class="video-wrapper"><iframe src="https://www.instagram.com/reel/DaiCo5chjjP/embed/" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe></div></div></div>
+        <div class="reveal"><div class="ornate-border rounded-2xl overflow-hidden"><div class="video-wrapper"><iframe src="https://www.instagram.com/reel/DaaX01iBwME/embed/" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe></div></div></div>
+        <div class="reveal"><div class="ornate-border rounded-2xl overflow-hidden"><div class="video-wrapper"><iframe src="https://www.instagram.com/reel/DaU3UkfBhNJ/embed/" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe></div></div></div>
+      </div>
+      <div class="reveal text-center mt-8 space-y-2">
+        <p class="font-sans text-xs text-cream-100/30">Can't see the videos? Watch directly on Instagram:</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="https://www.instagram.com/reel/DaiCo5chjjP/" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs font-sans text-gold-400 hover:text-gold-300 transition-colors"><span class="iconify w-3.5 h-3.5" data-icon="lucide:external-link"></span>Video 1</a>
+          <a href="https://www.instagram.com/reel/DaaX01iBwME/" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs font-sans text-gold-400 hover:text-gold-300 transition-colors"><span class="iconify w-3.5 h-3.5" data-icon="lucide:external-link"></span>Video 2</a>
+          <a href="https://www.instagram.com/reel/DaU3UkfBhNJ/" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs font-sans text-gold-400 hover:text-gold-300 transition-colors"><span class="iconify w-3.5 h-3.5" data-icon="lucide:external-link"></span>Video 3</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="relative py-24 md:py-32 bg-maroon-900/30">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <div class="ornament mb-4"><span class="text-xs font-sans text-gold-500 tracking-[0.25em] uppercase">Get in Touch</span></div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-cream-50">Contact <span class="text-gold-400">Us</span></h2>
+        <p class="mt-4 font-body text-lg text-cream-100/50 max-w-xl mx-auto">Questions about a scent, an order, or gifting? We reply personally — no bots, only family.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="tel:+919044742251" class="reveal group border border-gold-500/10 rounded-2xl p-6 text-center hover:border-gold-500/40 transition-colors block">
+          <div class="w-14 h-14 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-4 group-hover:bg-gold-500/20 transition-colors"><span class="iconify w-6 h-6 text-gold-400" data-icon="lucide:phone"></span></div>
+          <h3 class="font-display text-xl text-cream-100">Call Us</h3>
+          <p class="font-sans text-sm text-gold-400 mt-1">+91 90447 42251</p>
+          <p class="font-sans text-xs text-cream-100/40 mt-2 inline-flex items-center gap-1"><span class="iconify w-3 h-3" data-icon="lucide:clock"></span>Mon–Sat · 10am–7pm IST</p>
+        </a>
+        <a href="https://wa.me/919044742251?text=Hi!%20I%20have%20a%20question%20about%20Suvas%20Attars" target="_blank" rel="noopener" class="reveal group border border-gold-500/10 rounded-2xl p-6 text-center hover:border-[#25D366]/50 transition-colors block">
+          <div class="w-14 h-14 mx-auto rounded-full bg-[#25D366]/10 flex items-center justify-center mb-4 group-hover:bg-[#25D366]/20 transition-colors"><span class="iconify w-6 h-6 text-[#25D366]" data-icon="lucide:whatsapp"></span></div>
+          <h3 class="font-display text-xl text-cream-100">WhatsApp</h3>
+          <p class="font-sans text-sm text-[#25D366] mt-1">Chat with us</p>
+          <p class="font-sans text-xs text-cream-100/40 mt-2">Fastest replies, usually minutes</p>
+        </a>
+        <div class="reveal group border border-gold-500/10 rounded-2xl p-6 text-center hover:border-gold-500/40 transition-colors">
+          <div class="w-14 h-14 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-4 group-hover:bg-gold-500/20 transition-colors"><span class="iconify w-6 h-6 text-gold-400" data-icon="lucide:map-pin"></span></div>
+          <h3 class="font-display text-xl text-cream-100">Visit Us</h3>
+          <p class="font-sans text-sm text-gold-400 mt-1">Kannauj, Uttar Pradesh</p>
+          <p class="font-sans text-xs text-cream-100/40 mt-2">The attar capital of India</p>
+        </div>
+        <a href="mailto:hello@suvasattar.in" class="reveal group border border-gold-500/10 rounded-2xl p-6 text-center hover:border-gold-500/40 transition-colors block">
+          <div class="w-14 h-14 mx-auto rounded-full bg-gold-500/10 flex items-center justify-center mb-4 group-hover:bg-gold-500/20 transition-colors"><span class="iconify w-6 h-6 text-gold-400" data-icon="lucide:mail"></span></div>
+          <h3 class="font-display text-xl text-cream-100">Email</h3>
+          <p class="font-sans text-sm text-gold-400 mt-1 break-all">hello@suvasattar.in</p>
+          <p class="font-sans text-xs text-cream-100/40 mt-2">We reply within a day</p>
+        </a>
+      </div>
+      <div class="reveal mt-14 ornate-border rounded-2xl p-8 md:p-10 text-center bg-gradient-to-r from-maroon-900/60 to-maroon-950">
+        <h3 class="font-display text-2xl md:text-3xl text-cream-50">Need help choosing your <span class="text-gold-400">signature scent?</span></h3>
+        <p class="font-body text-cream-100/50 mt-2 max-w-lg mx-auto">Take our 30-second scent quiz, or simply message us — we'll match an attar to your mood.</p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+          <button onclick="toggleGuide(true)" class="inline-flex items-center gap-2 border border-gold-500/50 text-gold-400 font-sans text-sm font-semibold px-7 py-3 rounded-full hover:bg-gold-500/10 transition-all"><span class="iconify w-4 h-4" data-icon="lucide:sparkles"></span>Ask the Scent Guide</button>
+          <a href="https://wa.me/919044742251?text=Hi!%20Please%20help%20me%20choose%20an%20attar" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-sans text-sm font-semibold px-7 py-3 rounded-full hover:bg-[#20bd5a] transition-all"><span class="iconify w-4 h-4" data-icon="lucide:whatsapp"></span>WhatsApp Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- FOOTER -->
-  <footer class="bg-maroon-900/50 border-t border-gold-500/10 py-12 mt-auto font-sans text-xs">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="flex items-center gap-3">
-        <img src="https://z-cdn-media.chatglm.cn/files/896c4d8a-181b-404c-b427-d9df410065c4.png?auth_key=1886209471-024a2e3bc9924098a6fdc6d6d0d3d14d-0-7ac3464b09e63ef681f8eef52ce3c692" alt="Suvas" class="w-10 h-10 opacity-70">
-        <span class="text-cream-100/50">© 2026 Suvas Attars. Handcrafted with ♥ in Banaras.</span>
+  <footer class="bg-[#12030a] border-t border-gold-500/15">
+    <div class="max-w-6xl mx-auto px-6 py-14 grid gap-10 md:grid-cols-4">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://z-cdn-media.chatglm.cn/files/446440fc-504f-4109-ba00-5720dc1ed85d.png?auth_key=1884197723-b2ae75c0f6a1447a9461ae9f82d9f91c-0-186d1b22ea4c29dc90d812ece38a787d" alt="Suvas" class="w-9 h-9 object-contain">
+          <span class="font-display text-xl text-gold-400 tracking-[0.15em]">SUVAS</span>
+        </div>
+        <p class="font-body text-cream-100/40 leading-relaxed mb-5">Handcrafted, alcohol-free attars distilled the way our grandfathers did — patiently, purely, prayerfully.</p>
+        <div class="flex items-center gap-3">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-gold-500/10 flex items-center justify-center hover:bg-gold-500/25 transition-colors" aria-label="Instagram"><span class="iconify w-4 h-4 text-gold-400" data-icon="lucide:instagram"></span></a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-gold-500/10 flex items-center justify-center hover:bg-gold-500/25 transition-colors" aria-label="Facebook"><span class="iconify w-4 h-4 text-gold-400" data-icon="lucide:facebook"></span></a>
+          <a href="https://wa.me/919044742251" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-[#25D366]/10 flex items-center justify-center hover:bg-[#25D366]/25 transition-colors" aria-label="WhatsApp"><span class="iconify w-4 h-4 text-[#25D366]" data-icon="lucide:whatsapp"></span></a>
+        </div>
       </div>
-      <div class="flex gap-6 text-gold-400/80">
-        <a href="https://www.instagram.com/suvas_fragnance_2000" target="_blank" class="hover:text-gold-400 flex items-center gap-1">
-          <span class="iconify" data-icon="lucide:instagram"></span> Instagram
-        </a>
-        <a href="https://wa.me/919044742251" target="_blank" class="hover:text-gold-400 flex items-center gap-1">
-          <span class="iconify" data-icon="lucide:message-circle"></span> WhatsApp
-        </a>
+      <div>
+        <h4 class="font-sans text-sm font-semibold text-gold-400 tracking-wider uppercase mb-4">Quick Links</h4>
+        <ul class="space-y-2.5 font-sans text-sm text-cream-100/50">
+          <li><a href="#home" class="hover:text-gold-400 transition-colors">Home</a></li>
+          <li><a href="#products" class="hover:text-gold-400 transition-colors">Shop Fragrances</a></li>
+          <li><a href="#videos" class="hover:text-gold-400 transition-colors">Gallery</a></li>
+          <li><a href="#contact" class="hover:text-gold-400 transition-colors">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-sans text-sm font-semibold text-gold-400 tracking-wider uppercase mb-4">Our Attars</h4>
+        <ul class="space-y-2.5 font-sans text-sm text-cream-100/50">
+          <li><button onclick="openProduct(0)" class="hover:text-gold-400 transition-colors">Rasa — Rose &amp; Jasmine</button></li>
+          <li><button onclick="openProduct(1)" class="hover:text-gold-400 transition-colors">Ojas — Sandalwood &amp; Amber</button></li>
+          <li><button onclick="openProduct(2)" class="hover:text-gold-400 transition-colors">Aaroh — Vetiver &amp; Kewra</button></li>
+          <li><button onclick="openProduct(3)" class="hover:text-gold-400 transition-colors">Vyom — Oud &amp; Saffron</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-sans text-sm font-semibold text-gold-400 tracking-wider uppercase mb-4">Join the Parampara</h4>
+        <p class="font-body text-cream-100/40 mb-4">Be first to know about new distillations &amp; festive releases.</p>
+        <form id="news-form" class="flex gap-2">
+          <input id="news-email" type="email" required placeholder="Your email" class="field" style="padding:10px 14px;">
+          <button type="submit" class="bg-gold-500 text-maroon-950 font-sans font-semibold text-sm px-4 rounded-xl hover:bg-gold-400 transition-colors flex items-center justify-center"><span class="iconify w-4 h-4" data-icon="lucide:send"></span></button>
+        </form>
+        <p class="mt-3 inline-flex items-center gap-1.5 font-sans text-[11px] text-cream-100/30"><span class="iconify w-3 h-3 text-gold-500/60" data-icon="lucide:shield-check"></span>No spam. Only fragrance.</p>
+      </div>
+    </div>
+    <div class="border-t border-gold-500/10">
+      <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 font-sans text-xs text-cream-100/35">
+        <p>© <span id="year">2025</span> Suvas — A Parampara of Purity. All rights reserved.</p>
+        <p class="inline-flex items-center gap-1.5">Crafted with <span class="iconify w-3.5 h-3.5 text-gold-500" data-icon="lucide:heart"></span> in Kannauj, India</p>
       </div>
     </div>
   </footer>
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- ================= PRODUCT MODAL ================= -->
+  <div id="product-modal" class="modal-overlay fixed inset-0 z-[80] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="absolute inset-0" onclick="closeProduct()"></div>
+    <div class="modal-content relative ornate-border bg-maroon-950 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeProduct()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-maroon-950/80 border border-gold-500/30 flex items-center justify-center text-gold-400 hover:bg-gold-500/15 transition-colors" aria-label="Close"><span class="iconify w-4 h-4" data-icon="lucide:x"></span></button>
+      <div class="grid md:grid-cols-2">
+        <div class="product-bg flex items-center justify-center p-8 border-b md:border-b-0 md:border-r border-gold-500/15">
+          <div id="pm-media" class="w-full h-60 md:h-80"></div>
+        </div>
+        <div class="p-6 md:p-8">
+          <p id="pm-family" class="text-[10px] font-sans tracking-[0.25em] uppercase text-gold-500"></p>
+          <h3 id="pm-name" class="font-display text-4xl text-cream-50 mt-1"></h3>
+          <p id="pm-tag" class="text-gold-400/80 font-sans text-sm mt-1"></p>
+          <p id="pm-desc" class="font-body text-cream-100/60 mt-4 leading-relaxed"></p>
+          <div id="pm-notes" class="flex flex-wrap gap-2 mt-4"></div>
+          <div class="mt-6">
+            <p class="text-xs font-sans text-cream-100/50 uppercase tracking-wider mb-2">Select Size — bottle photo changes with size</p>
+            <div id="pm-sizes" class="flex gap-2"></div>
+          </div>
+          <div class="mt-6 flex items-center gap-4">
+            <div class="flex items-center gap-3">
+              <button class="qty-btn" onclick="pmQty(-1)" aria-label="Decrease quantity"><span class="iconify w-4 h-4" data-icon="lucide:minus"></span></button>
+              <span id="pm-qty" class="font-sans font-semibold w-6 text-center">1</span>
+              <button class="qty-btn" onclick="pmQty(1)" aria-label="Increase quantity"><span class="iconify w-4 h-4" data-icon="lucide:plus"></span></button>
+            </div>
+            <div class="ml-auto text-right">
+              <p class="text-[10px] font-sans text-cream-100/40 uppercase tracking-wider">Price</p>
+              <p id="pm-price" class="font-sans font-bold text-2xl text-gold-400"></p>
+            </div>
+          </div>
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="pmAdd()" class="inline-flex items-center justify-center gap-2 bg-gold-500 text-maroon-950 font-sans font-semibold py-3 rounded-full hover:bg-gold-400 transition-colors"><span class="iconify w-4 h-4" data-icon="lucide:shopping-bag"></span>Add to Cart</button>
+            <button onclick="pmOrder()" class="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white font-sans font-semibold py-3 rounded-full hover:bg-[#20bd5a] transition-colors"><span class="iconify w-4 h-4" data-icon="lucide:whatsapp"></span>Order on WhatsApp</button>
+          </div>
+          <p class="mt-4 flex items-center gap-2 text-xs font-sans text-cream-100/40"><span class="iconify w-3.5 h-3.5 text-gold-400" data-icon="lucide:truck"></span>Shipping ₹99 across India · Crystal decanter box included</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CART DRAWER ================= -->
+  <div id="cart-overlay" class="fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm" onclick="closeCart()"></div>
+  <aside id="cart-drawer" class="fixed top-0 right-0 bottom-0 z-[75] w-full max-w-md bg-maroon-950 border-l border-gold-500/25 flex flex-col" aria-label="Shopping cart">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gold-500/20 bg-gradient-to-r from-maroon-950 to-maroon-900">
+      <div class="flex items-center gap-3">
+        <span class="iconify w-5 h-5 text-gold-400" data-icon="lucide:shopping-bag"></span>
+        <h3 class="font-display text-2xl text-cream-50">Your Cart</h3>
+        <span id="cart-count-label" class="text-xs font-sans text-cream-100/50"></span>
+      </div>
+      <button onclick="closeCart()" class="g-iconbtn" aria-label="Close cart"><span class="iconify w-5 h-5" data-icon="lucide:x"></span></button>
+    </div>
+    <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+    <div id="cart-footer" class="border-t border-gold-500/20 p-5 space-y-4 bg-maroon-950">
+      <div class="grid grid-cols-1 gap-2">
+        <input id="cust-name" class="field" placeholder="Your name (optional)">
+        <input id="cust-address" class="field" placeholder="Delivery address / city & PIN (optional)">
+        <select id="cust-pay" class="field">
+          <option value="">Payment method (optional)</option>
+          <option>UPI / GPay / PhonePe</option>
+          <option>Bank Transfer</option>
+          <option>Cash on Delivery</option>
+        </select>
+      </div>
+      <div class="space-y-1.5 font-sans text-sm">
+        <div class="flex justify-between text-cream-100/60"><span>Subtotal</span><span id="sum-sub">₹0</span></div>
+        <div class="flex justify-between text-cream-100/60"><span>Shipping</span><span id="sum-ship">₹99</span></div>
+        <div class="flex justify-between text-cream-50 font-bold text-base pt-2 border-t border-gold-500/15"><span>Total</span><span id="sum-total" class="text-gold-400">₹0</span></div>
+      </div>
+      <button onclick="checkoutWhatsApp()" class="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white font-sans font-semibold py-3.5 rounded-full hover:bg-[#20bd5a] transition-colors">
+        <span class="iconify w-5 h-5" data-icon="lucide:whatsapp"></span>Place Order on WhatsApp
+      </button>
+      <button onclick="closeCart()" class="w-full text-center font-sans text-xs text-cream-100/40 hover:text-gold-400 transition-colors">Continue shopping</button>
+    </div>
+  </aside>
+
+  <!-- ================= SCENT GUIDE PANEL ================= -->
+  <div id="guide-panel" role="dialog" aria-label="Scent Guide chat">
+    <div class="g-head">
+      <div class="g-av">S<i></i></div>
+      <div class="flex-1 min-w-0">
+        <p>Suvā — Scent Guide</p>
+        <p>Online · replies instantly</p>
+      </div>
+      <button class="g-iconbtn" onclick="toggleGuide(false)" aria-label="Close guide"><span class="iconify w-5 h-5" data-icon="lucide:x"></span></button>
+    </div>
+    <div id="guide-msgs"></div>
+    <div id="guide-chips"></div>
+    <form class="g-form" id="guide-form">
+      <input id="guide-input" type="text" placeholder="Ask about scents, sizes, shipping…" autocomplete="off">
+      <button type="submit" class="g-send" id="guide-send" aria-label="Send"><span class="iconify w-5 h-5" data-icon="lucide:send"></span></button>
+    </form>
+  </div>
+
   <script>
-    // --- 1. PRODUCT CATALOG DATA ---
-    const PRODUCTS = [
-      { id: 1, name: 'Aaroh', size: '10ml', category: 'Floral', img: 'https://z-cdn-media.chatglm.cn/files/2c3af9ee-9232-4e2a-98a4-b84b48202f8e.png?auth_key=1886209822-2c92247076b049e6b55ddd076ec6b30d-0-57d815988c51b73627b4b2c8d61f74fa', desc: 'The royal rose — deep, velvety, and intoxicatingly rich hydro-distilled Damask roses.' },
-      { id: 2, name: 'Vyom', size: '15ml', category: 'Woody', img: 'https://z-cdn-media.chatglm.cn/files/7343d869-7f3c-4577-800a-1c4194e4866d.png?auth_key=1886209926-47130c5222fe486da7b2a4fd5087cbac-0-69a44c9e2921cfb34aa0335eb981d6e3', desc: 'Creamy Mysore sandalwood softened with delicate white floral whispers.' },
-      { id: 3, name: 'Rasa', size: '8ml', category: 'Musk', img: 'https://z-cdn-media.chatglm.cn/files/643ae655-f0a0-45d5-809d-73986a9d0546.png?auth_key=1886210056-17519de1a1884888a6bda415570bc804-0-fa9851262040cef82a9c867e2168c7c1', desc: 'A noble musk blend — warm, powerful, and undeniably captivating oriental spice.' },
-      { id: 4, name: 'Oja', size: '12ml', category: 'Amber', img: 'https://z-cdn-media.chatglm.cn/files/cbc05b5c-08fa-4ade-ba99-5959f62eb046.png?auth_key=1886210185-7f360907e0374c388257d7f31055ccd4-0-5a9f69bc2512f88b27e5647f12ddb052', desc: 'Rich amber resin fused with exotic cinnamon and labdanum.' }
-    ];
+  /* ============================================================
+     SUVAS — full site logic
+     ============================================================ */
 
-    const PREBOOKING_AMOUNT = 200;
+  /* ---------- CONFIG (edit these) ---------- */
+  const WA_NUMBER    = '919044742251';
+  const SHIPPING_FEE = 99;   // flat shipping fee on every order (₹)
 
-    let cart = [];
-    let selectedModalProductId = null;
-    let botActive = false;
+  /* ---------- ⭐ OPTIONAL: your real bottle photos ----------
+     Paste DIRECT image links (1st=8ml, 2nd=10ml, 3rd=12ml, 4th=15ml).
+     Leave '' to keep the built-in gold bottles (always visible).   */
+  const BOTTLE_IMAGES = { 8:'', 10:'', 12:'', 15:'' };
 
-    // --- 2. SILKY SMOOTH CUSTOM CURSOR ---
-    const dot = document.getElementById('cursor-dot');
-    const ring = document.getElementById('cursor-ring');
+  /* ---------- PRODUCT DATA (edit prices here) ---------- */
+  const PRODUCTS = [
+    { id:'rasa', name:'Rasa', family:'Floral', tagline:'Damask Rose · Jasmine Sambac',
+      desc:'Damask rose and night-blooming jasmine distilled slowly over aged sandalwood — a soft, luminous floral that lingers like a fond memory.',
+      notes:['Damask Rose','Jasmine Sambac','Mysore Sandalwood'],
+      tip:'Perfect for evenings, pooja and close gatherings. Two dabs on the wrists carry you through the day.',
+      prices:{8:999, 10:1199, 12:1399, 15:1699} },
+    { id:'ojas', name:'Ojas', family:'Woody', tagline:'Mysore Sandalwood · Amber',
+      desc:'Deep Mysore sandalwood wrapped in warm amber with a whisper of saffron — grounding, meditative and unmistakably regal.',
+      notes:['Sandalwood','Amber','Saffron'],
+      tip:'A meditation and work-day companion. Apply at pulse points and let it bloom slowly.',
+      prices:{8:1099, 10:1299, 12:1499, 15:1799} },
+    { id:'aaroh', name:'Aaroh', family:'Fresh', tagline:'Vetiver · Kewra · Bergamot',
+      desc:'The first rain on warm earth — vetiver root and kewra water lifted by mint-cool bergamot. Clean, green and endlessly wearable.',
+      notes:['Vetiver','Kewra','Bergamot'],
+      tip:'Your everyday office and travel scent. Light, crisp, and loved in Indian summers.',
+      prices:{8:899, 10:1099, 12:1299, 15:1599} },
+    { id:'vyom', name:'Vyom', family:'Oriental', tagline:'Agarwood Oud · Saffron · Black Rose',
+      desc:'Smoked agarwood meeting saffron and dark rose — a bold, after-dark signature for those who enter rooms like poetry.',
+      notes:['Agarwood (Oud)','Saffron','Black Rose'],
+      tip:'For weddings, winter nights and grand entrances. One touch on the shawl is enough.',
+      prices:{8:1299, 10:1499, 12:1749, 15:1999} }
+  ];
+  const SIZES = [8, 10, 12, 15];
 
-    let mouseX = 0, mouseY = 0;
-    let dotX = 0, dotY = 0;
-    let ringX = 0, ringY = 0;
-    let scale = 1;
+  /* ---------- HELPERS ---------- */
+  const el  = id => document.getElementById(id);
+  const fmt = n  => '₹' + n.toLocaleString('en-IN');
+  const minPrice = p => Math.min(...Object.values(p.prices));
+  const shippingFor = () => SHIPPING_FEE;   /* flat fee on every order — no free shipping */
 
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+  /* ============================================================
+     BOTTLE ARTWORK — inline SVG, drawn directly in the page.
+     Four distinct designs: 8ml round medallion, 10ml dome band,
+     12ml faceted onion, 15ml tall fluted. Cannot fail to show.
+     ============================================================ */
+  const BOTTLE_ART = {
+    8:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260"><defs><linearGradient id="bgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9e79a"/><stop offset=".4" stop-color="#D4A843"/><stop offset=".75" stop-color="#966625"/><stop offset="1" stop-color="#e8c768"/></linearGradient><radialGradient id="mdA" cx=".5" cy=".42" r=".65"><stop offset="0" stop-color="#fffdf5"/><stop offset=".7" stop-color="#efe3c6"/><stop offset="1" stop-color="#d9c9a4"/></radialGradient></defs><ellipse cx="100" cy="251" rx="62" ry="7" fill="rgba(0,0,0,.45)"/><path d="M100 8c-11 10-20 24-20 38 0 12 9 20 20 20s20-8 20-20c0-14-9-28-20-38Z" fill="url(#bgA)"/><path d="M100 10v54M89 16c-5 9-7 19-7 30M111 16c5 9 7 19 7 30" stroke="#8a5a1d" stroke-width="1.3" fill="none" opacity=".55"/><rect x="83" y="64" width="34" height="11" rx="3" fill="url(#bgA)"/><circle cx="100" cy="168" r="80" fill="url(#bgA)"/><circle cx="100" cy="168" r="80" fill="none" stroke="#7a5124" stroke-width="2"/><circle cx="100" cy="168" r="56" fill="url(#mdA)" stroke="#966625" stroke-width="4"/><path d="M100 124a44 44 0 0 1 0 88 33 33 0 0 1 0-66 22 22 0 0 1 0 44 11 11 0 0 1 0-22" fill="none" stroke="#a97b2f" stroke-width="6" stroke-linecap="round" opacity=".9"/><path d="M48 138a58 58 0 0 1 26-32" stroke="#fff" stroke-width="7" opacity=".35" fill="none" stroke-linecap="round"/></svg>',
+    10:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260"><defs><linearGradient id="bgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9e79a"/><stop offset=".4" stop-color="#D4A843"/><stop offset=".8" stop-color="#966625"/><stop offset="1" stop-color="#e8c768"/></linearGradient><linearGradient id="lqB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b45a"/><stop offset="1" stop-color="#7c3f0e"/></linearGradient></defs><ellipse cx="100" cy="251" rx="56" ry="7" fill="rgba(0,0,0,.45)"/><path d="M100 8c-10 11-18 25-18 38 0 11 8 18 18 18s18-7 18-18c0-13-8-27-18-38Z" fill="url(#bgB)"/><path d="M100 10v52" stroke="#8a5a1d" stroke-width="1.2" opacity=".5"/><rect x="80" y="62" width="40" height="12" rx="3" fill="url(#bgB)"/><path d="M56 250V152c0-48 20-78 44-78s44 30 44 78v98Z" fill="url(#lqB)"/><path d="M56 250V152c0-48 20-78 44-78s44 30 44 78v98Z" fill="none" stroke="#5e2f08" stroke-width="2"/><path d="M76 128c12-9 36-9 48 0-12 9-36 9-48 0Z" fill="#f7e08a" opacity=".85"/><rect x="56" y="150" width="88" height="16" fill="url(#bgB)"/><path d="M60 158h80" stroke="#7a5124" stroke-width="3" stroke-dasharray="6 5" opacity=".7"/><rect x="50" y="238" width="100" height="13" rx="4" fill="url(#bgB)"/><path d="M68 98c8-12 18-19 30-21" stroke="#fff" stroke-width="6" opacity=".3" fill="none" stroke-linecap="round"/></svg>',
+    12:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260"><defs><linearGradient id="bgC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9e79a"/><stop offset=".4" stop-color="#D4A843"/><stop offset=".8" stop-color="#966625"/><stop offset="1" stop-color="#e8c768"/></linearGradient><linearGradient id="lqC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e89a3f"/><stop offset="1" stop-color="#6e3208"/></linearGradient></defs><ellipse cx="100" cy="251" rx="60" ry="7" fill="rgba(0,0,0,.45)"/><path d="M100 8c-11 11-21 26-21 40 0 12 10 20 21 20s21-8 21-20c0-14-10-29-21-40Z" fill="url(#bgC)"/><path d="M100 10v56" stroke="#8a5a1d" stroke-width="1.2" opacity=".5"/><rect x="78" y="66" width="44" height="12" rx="3" fill="url(#bgC)"/><path d="M100 80c31 0 57 35 57 85 0 48-27 80-57 80s-57-32-57-80c0-50 26-85 57-85Z" fill="url(#lqC)"/><path d="M100 82v160M71 93c-11 20-17 45-17 72s6 51 17 71M129 93c11 20 17 45 17 72s-6 51-17 71M85 84c-15 23-24 51-24 81s9 58 24 81M115 84c15 23 24 51 24 81s-9 58-24 81" stroke="url(#bgC)" stroke-width="7" fill="none" opacity=".95"/><path d="M100 118l6 10-6 10-6-10Z" fill="#f7e08a"/><path d="M100 196l6 10-6 10-6-10Z" fill="#f7e08a"/><path d="M56 100c-8 14-13 32-13 52" stroke="#fff" stroke-width="5" opacity=".25" fill="none" stroke-linecap="round"/></svg>',
+    15:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260"><defs><linearGradient id="bgD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9e79a"/><stop offset=".4" stop-color="#D4A843"/><stop offset=".8" stop-color="#966625"/><stop offset="1" stop-color="#e8c768"/></linearGradient><linearGradient id="lqD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8b055"/><stop offset="1" stop-color="#7a4210"/></linearGradient></defs><ellipse cx="100" cy="251" rx="52" ry="7" fill="rgba(0,0,0,.45)"/><path d="M100 6c-9 14-15 30-15 44 0 11 7 18 15 18s15-7 15-18c0-14-6-30-15-44Z" fill="url(#bgD)"/><path d="M100 8v58" stroke="#8a5a1d" stroke-width="1.2" opacity=".5"/><rect x="80" y="66" width="40" height="11" rx="3" fill="url(#bgD)"/><path d="M70 250V130c0-32 13-52 30-52s30 20 30 52v120Z" fill="url(#lqD)"/><path d="M70 250V130c0-32 13-52 30-52s30 20 30 52v120Z" fill="none" stroke="#5e2f08" stroke-width="2"/><path d="M85 96v146M100 90v152M115 96v146" stroke="url(#bgD)" stroke-width="4" opacity=".75"/><rect x="70" y="150" width="60" height="14" fill="url(#bgD)"/><path d="M76 157h48" stroke="#7a5124" stroke-width="3" stroke-dasharray="6 5" opacity=".7"/><rect x="62" y="238" width="76" height="13" rx="4" fill="url(#bgD)"/><path d="M80 100c5-9 11-15 20-18" stroke="#fff" stroke-width="5" opacity=".3" fill="none" stroke-linecap="round"/></svg>'
+  };
+  window.BOTTLE_ART = BOTTLE_ART;   /* used by the head error-handler as photo fallback */
 
-    function animateCursor() {
-      dotX += (mouseX - dotX) * 0.85;
-      dotY += (mouseY - dotY) * 0.85;
-      
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-
-      let targetScale = document.body.classList.contains('hovered') ? 1.5 : 1;
-      scale += (targetScale - scale) * 0.15;
-
-      dot.style.transform = `translate(${dotX}px, ${dotY}px)`;
-      ring.style.transform = `translate(${ringX}px, ${ringY}px) scale(${scale})`;
-
-      requestAnimationFrame(animateCursor);
+  function bottleMedia(size){
+    const u = (BOTTLE_IMAGES[size] || '').trim();
+    if (u){
+      return '<div class="bottle-media"><img src="' + u + '" data-bottle="' + size + '" alt="Attar bottle ' + size + ' ml"></div>';
     }
-    animateCursor();
+    return '<div class="bottle-media"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">' + (BOTTLE_ART[size] || BOTTLE_ART[12]) + '</div></div>';
+  }
+  function swapBottle(container, size){
+    container.style.opacity = '0';
+    setTimeout(() => { container.innerHTML = bottleMedia(size); container.style.opacity = '1'; }, 180);
+  }
 
-    function bindCursorHovers() {
-      document.querySelectorAll('a, button, input, textarea, label, .interactive').forEach(el => {
-        if(!el.dataset.hoverBound) {
-          el.addEventListener('mouseenter', () => document.body.classList.add('hovered'));
-          el.addEventListener('mouseleave', () => document.body.classList.remove('hovered'));
-          el.dataset.hoverBound = 'true';
-        }
-      });
+  /* ---------- TOASTS ---------- */
+  function toast(msg, type = 'ok', action){
+    const box = el('toast-container');
+    const t = document.createElement('div');
+    t.className = 'toast-in flex items-center gap-3 bg-maroon-900/95 border border-gold-500/30 rounded-xl px-4 py-3 shadow-2xl max-w-xs backdrop-blur';
+    t.innerHTML =
+      `<span class="iconify w-5 h-5 ${type==='ok' ? 'text-gold-400' : 'text-red-400'}" data-icon="lucide:${type==='ok' ? 'check-circle' : 'alert-circle'}"></span>
+       <span class="font-sans text-sm text-cream-100 flex-1">${msg}</span>` +
+      (action ? `<button class="font-sans text-xs font-semibold text-gold-400 hover:text-gold-300 underline whitespace-nowrap">${action.label}</button>` : '');
+    box.appendChild(t);
+    const dismiss = () => { t.classList.add('toast-out'); setTimeout(() => t.remove(), 380); };
+    if (action) t.querySelector('button').onclick = () => { action.fn(); dismiss(); };
+    setTimeout(dismiss, 3400);
+  }
+
+  /* ============================================================
+     WHATSAPP ORDER MESSAGE (detailed order — shipping always charged)
+     ============================================================ */
+  function buildOrderMessage(items, cust){
+    const rows = items.map((it, i) =>
+      `${i + 1}. ${it.name} — ${it.size} ml × ${it.qty} — ${fmt(it.price * it.qty)}`);
+    const sub  = items.reduce((s, it) => s + it.price * it.qty, 0);
+    const ship = shippingFor();
+
+    let m =
+`Hi Suvas! 🌸
+I would like to place an order:
+
+🛍️ *Order Details*
+ ${rows.join('\n')}
+
+━━━━━━━━━━━━━━
+Subtotal: ${fmt(sub)}
+Shipping: ${fmt(ship)}
+*Total: ${fmt(sub + ship)}*
+━━━━━━━━━━━━━━`;
+
+    if (cust){
+      if (cust.name)    m += `\n👤 Name: ${cust.name}`;
+      if (cust.address) m += `\n📍 Deliver to: ${cust.address}`;
+      if (cust.pay)     m += `\n💳 Payment: ${cust.pay}`;
     }
-    bindCursorHovers();
+    m += `\n\nPlease confirm availability and payment details. Thank you! 🙏`;
+    return m;
+  }
 
-    // --- 3. PAGE VIEW SWITCHING (STORE vs CHECKOUT) ---
-    function switchView(viewName) {
-      document.querySelectorAll('.view-page').forEach(el => el.classList.remove('active-view'));
-      if (viewName === 'checkout') {
-        document.getElementById('view-checkout').classList.add('active-view');
-        renderCheckoutSummary();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        document.getElementById('view-store').classList.add('active-view');
-      }
+  function openWhatsApp(items, cust){
+    const text = items ? buildOrderMessage(items, cust)
+                       : "Hi Suvas! 🌸 I'm interested in your attars. Please share details.";
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+  }
+
+  function bulkWhatsApp(){
+    const m = `Hi Suvas! 🌸
+I want to place a *bulk order* for Suvas Attars.
+
+Please share:
+• Wholesale price list
+• Minimum order quantity
+• Delivery timeline
+
+Thank you! 🙏`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(m)}`, '_blank');
+  }
+
+  /* ============================================================
+     CART
+     ============================================================ */
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem('suvas_cart') || '[]'); } catch(e){ cart = []; }
+  const saveCart = () => { try { localStorage.setItem('suvas_cart', JSON.stringify(cart)); } catch(e){} };
+  const cartTotal = () => cart.reduce((s, it) => s + it.price * it.qty, 0);
+
+  function addToCart(pi, size, qty){
+    const p = PRODUCTS[pi];
+    const found = cart.find(c => c.id === p.id && c.size === size);
+    if (found) found.qty += qty;
+    else cart.push({ id:p.id, name:p.name, size, qty, price:p.prices[size], pi });
+    saveCart(); renderCart(); popBadge();
+    toast(`${p.name} · ${size} ml added to cart 🛍️`, 'ok', { label:'View', fn: openCart });
+  }
+  function cartQty(i, d){
+    cart[i].qty += d;
+    if (cart[i].qty <= 0) cart.splice(i, 1);
+    saveCart(); renderCart();
+  }
+  function cartRemove(i){
+    cart.splice(i, 1);
+    saveCart(); renderCart();
+    toast('Removed from cart', 'ok');
+  }
+  function clearCart(){ cart = []; saveCart(); renderCart(); }
+
+  function popBadge(){
+    const b = el('cart-badge');
+    b.classList.remove('badge-pop'); void b.offsetWidth; b.classList.add('badge-pop');
+  }
+
+  function renderCart(){
+    const n = cart.reduce((s, i) => s + i.qty, 0);
+    const badge = el('cart-badge');
+    badge.textContent = n;
+    badge.classList.toggle('hidden', !n);
+    el('cart-count-label').textContent = n ? `(${n} item${n > 1 ? 's' : ''})` : '';
+
+    const box = el('cart-items');
+    if (!cart.length){
+      el('cart-footer').style.display = 'none';
+      box.innerHTML =
+        `<div class="h-full flex flex-col items-center justify-center text-center gap-4 py-16">
+          <span class="iconify w-12 h-12 text-gold-500/40" data-icon="lucide:shopping-bag"></span>
+          <p class="font-display text-2xl text-cream-100/70">Your cart is empty</p>
+          <p class="font-body text-cream-100/40 max-w-[230px]">Discover four souls of attar and find the one that feels like you.</p>
+          <button onclick="closeCart()" class="mt-2 bg-gold-500 text-maroon-950 font-sans text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gold-400 transition-colors">Browse Fragrances</button>
+        </div>`;
+      return;
     }
-
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if(el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // --- 4. CATALOG RENDER & FILTER ---
-    function renderProducts(items) {
-      const grid = document.getElementById('product-grid');
-      grid.innerHTML = items.map(p => `
-        <div class="glass-card rounded-2xl overflow-hidden ornate-border group flex flex-col justify-between p-5 hover:-translate-y-2 transition-all duration-300">
-          <div onclick="openModal(${p.id})" class="cursor-pointer">
-            <div class="relative bg-gold-500/5 rounded-xl p-4 mb-4 flex items-center justify-center">
-              <span class="absolute top-2 right-2 text-[10px] font-sans text-gold-400 bg-gold-500/10 px-2.5 py-1 rounded-full uppercase tracking-widest">${p.category}</span>
-              <span class="absolute top-2 left-2 text-[10px] font-sans text-cream-50 bg-maroon-700/80 px-2.5 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">Pre-Book</span>
-              <img src="${p.img}" alt="${p.name}" class="h-48 object-contain group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <h3 class="font-display text-2xl font-bold text-cream-50">${p.name}</h3>
-            <p class="font-body text-cream-100/50 text-sm mt-1 line-clamp-2">${p.desc}</p>
+    el('cart-footer').style.display = '';
+    box.innerHTML = cart.map((it, i) => `
+      <div class="flex gap-3 items-center border border-gold-500/15 rounded-xl p-3 bg-maroon-900/40">
+        <div class="w-12 h-14 shrink-0 cart-thumb">${bottleMedia(it.size)}</div>
+        <div class="flex-1 min-w-0">
+          <p class="font-display text-xl text-cream-50 leading-tight">${it.name}</p>
+          <p class="text-xs font-sans text-cream-100/50">${it.size} ml · ${fmt(it.price)} each</p>
+          <div class="flex items-center gap-2 mt-2">
+            <button class="qty-btn" onclick="cartQty(${i},-1)" aria-label="Decrease"><span class="iconify w-3.5 h-3.5" data-icon="lucide:minus"></span></button>
+            <span class="font-sans text-sm w-5 text-center">${it.qty}</span>
+            <button class="qty-btn" onclick="cartQty(${i},1)" aria-label="Increase"><span class="iconify w-3.5 h-3.5" data-icon="lucide:plus"></span></button>
           </div>
-          <div class="mt-6 flex items-center justify-between font-sans">
+        </div>
+        <div class="text-right flex flex-col items-end gap-2">
+          <p class="font-sans font-semibold text-gold-400">${fmt(it.price * it.qty)}</p>
+          <button onclick="cartRemove(${i})" class="text-cream-100/30 hover:text-red-400 transition-colors" aria-label="Remove"><span class="iconify w-4 h-4" data-icon="lucide:trash"></span></button>
+        </div>
+      </div>`).join('');
+
+    const sub = cartTotal(), ship = shippingFor();
+    el('sum-sub').textContent   = fmt(sub);
+    el('sum-ship').textContent  = fmt(ship);
+    el('sum-total').textContent = fmt(sub + ship);
+  }
+
+  function openCart(){
+    renderCart();
+    el('cart-drawer').classList.add('open');
+    el('cart-overlay').classList.add('open');
+    document.body.classList.add('cart-open');
+  }
+  function closeCart(){
+    el('cart-drawer').classList.remove('open');
+    el('cart-overlay').classList.remove('open');
+    document.body.classList.remove('cart-open');
+  }
+
+  function checkoutWhatsApp(){
+    if (!cart.length){ toast('Your cart is empty', 'error'); return; }
+    const cust = {
+      name:    el('cust-name').value.trim(),
+      address: el('cust-address').value.trim(),
+      pay:     el('cust-pay').value
+    };
+    openWhatsApp(cart.map(it => ({ ...it })), cust);
+    toast('WhatsApp opened — press Send to complete your order ✅', 'ok',
+          { label:'Clear cart', fn: clearCart });
+  }
+
+  /* ============================================================
+     PRODUCT GRID + MODAL
+     ============================================================ */
+  function renderGrid(){
+    el('product-grid').innerHTML = PRODUCTS.map((p, i) => `
+      <div class="product-card reveal cursor-pointer group border border-gold-500/15 rounded-2xl overflow-hidden bg-maroon-900/40 hover:border-gold-500/40" onclick="openProduct(${i})">
+        <div class="relative h-64 product-bg flex items-center justify-center p-6">
+          <div class="w-full h-full">${bottleMedia(12)}</div>
+          <span class="absolute top-4 left-4 text-[10px] font-sans tracking-[0.2em] uppercase text-gold-400 bg-maroon-950/80 border border-gold-500/30 px-3 py-1 rounded-full">${p.family}</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display text-2xl text-cream-50">${p.name}</h3>
+          <p class="text-gold-500/80 text-xs font-sans mt-1">${p.tagline}</p>
+          <p class="font-body text-cream-100/50 mt-2 text-sm leading-relaxed">${p.desc}</p>
+          <div class="mt-4 flex items-center justify-between">
             <div>
-              <span class="font-display text-xl font-bold text-gold-400 block leading-none">Pre-Book ₹200</span>
-              <span class="text-[10px] text-cream-100/50 mt-1 block">/ ${p.size}</span>
+              <span class="text-[10px] font-sans text-cream-100/40 uppercase tracking-wider">From</span>
+              <p class="font-sans font-semibold text-gold-400">${fmt(minPrice(p))}</p>
             </div>
-            <button onclick="addToCart(${p.id})" class="bg-gold-500 hover:bg-gold-400 text-maroon-950 p-3 rounded-full transition-transform active:scale-90">
-              <span class="iconify w-4 h-4" data-icon="lucide:plus"></span>
-            </button>
+            <span class="inline-flex items-center gap-1 text-xs font-sans font-semibold text-gold-400 group-hover:gap-2 transition-all">View &amp; Buy <span class="iconify w-3.5 h-3.5" data-icon="lucide:arrow-right"></span></span>
           </div>
         </div>
-      `).join('');
-      bindCursorHovers();
-    }
+      </div>`).join('');
+    observeReveals();
+  }
 
-    function filterProducts(category) {
-      document.querySelectorAll('.cat-filter-btn').forEach(btn => btn.classList.remove('bg-gold-500', 'text-maroon-950'));
-      event.target.classList.add('bg-gold-500', 'text-maroon-950');
-      
-      if(category === 'all') renderProducts(PRODUCTS);
-      else renderProducts(PRODUCTS.filter(p => p.category === category));
-    }
+  let pm = { i:0, size:12, qty:1 };
+  function openProduct(i){
+    const p = PRODUCTS[i];
+    pm = { i, size:12, qty:1 };
+    el('pm-media').innerHTML = bottleMedia(12);
+    el('pm-family').textContent = p.family + ' Attar';
+    el('pm-name').textContent = p.name;
+    el('pm-tag').textContent = p.tagline;
+    el('pm-desc').textContent = p.desc;
+    el('pm-notes').innerHTML = p.notes.map(nt =>
+      `<span class="text-[11px] font-sans text-gold-300/90 border border-gold-500/25 bg-gold-500/5 px-3 py-1 rounded-full">${nt}</span>`).join('');
+    el('pm-sizes').innerHTML = SIZES.map(s =>
+      `<button class="size-chip ${s === 12 ? 'active' : ''}" data-size="${s}" onclick="pmSetSize(${s}, this)">${s} ml</button>`).join('');
+    el('pm-qty').textContent = 1;
+    pmUpdatePrice();
+    el('product-modal').classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+  function closeProduct(){
+    el('product-modal').classList.remove('open');
+    document.body.classList.remove('modal-open');
+  }
+  function pmSetSize(s, btn){
+    pm.size = s;
+    btn.parentElement.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    pmUpdatePrice();
+    swapBottle(el('pm-media'), s);
+  }
+  function pmQty(d){
+    pm.qty = Math.max(1, Math.min(10, pm.qty + d));
+    el('pm-qty').textContent = pm.qty;
+    pmUpdatePrice();
+  }
+  function pmUpdatePrice(){
+    el('pm-price').textContent = fmt(PRODUCTS[pm.i].prices[pm.size] * pm.qty);
+  }
+  function pmAdd(){
+    addToCart(pm.i, pm.size, pm.qty);
+    closeProduct();
+  }
+  function pmOrder(){
+    const p = PRODUCTS[pm.i];
+    openWhatsApp([{ name:p.name, size:pm.size, qty:pm.qty, price:p.prices[pm.size] }]);
+  }
 
-    // --- 5. E-COMMERCE CART SYSTEM ---
-    function addToCart(id) {
-      const existing = cart.find(item => item.id === id);
-      if(existing) existing.qty += 1;
-      else {
-        const p = PRODUCTS.find(prod => prod.id === id);
-        cart.push({ ...p, qty: 1 });
-      }
-      updateCartUI();
-      showToast('Added to Pre-Booking Cart!');
-    }
+  /* ============================================================
+     HERO CAROUSEL
+     ============================================================ */
+  const slides = Array.from(document.querySelectorAll('.hero-slide'));
+  const DUR = 6500;
+  let cur = 0, heroTimer = null;
 
-    function updateCartUI() {
-      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-      document.getElementById('cart-badge-count').textContent = totalCount;
+  function goSlide(n){
+    slides[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    el('slide-current').textContent = String(cur + 1).padStart(2, '0');
+    document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    restartProgress();
+  }
+  function restartProgress(){
+    const p = el('hero-progress');
+    p.style.transition = 'none'; p.style.width = '0%';
+    void p.offsetWidth;
+    p.style.transition = `width ${DUR}ms linear`; p.style.width = '100%';
+  }
+  function heroSlide(d){ goSlide(cur + d); resetHeroTimer(); }
+  function resetHeroTimer(){ clearInterval(heroTimer); heroTimer = setInterval(() => goSlide(cur + 1), DUR); }
 
-      const drawerContainer = document.getElementById('drawer-cart-items');
-      if (cart.length === 0) {
-        drawerContainer.innerHTML = `<p class="text-center font-sans text-cream-100/40 py-10">Your cart is empty.</p>`;
-      } else {
-        drawerContainer.innerHTML = cart.map(item => `
-          <div class="flex items-center gap-4 pt-3 font-sans">
-            <img src="${item.img}" class="w-12 h-12 object-contain bg-gold-500/5 rounded-lg">
-            <div class="flex-1">
-              <h4 class="font-bold text-cream-50">${item.name} <span class="text-cream-100/40 font-normal text-[10px]">(${item.size})</span></h4>
-              <p class="text-xs text-gold-400">Pre-book ₹200 × ${item.qty}</p>
-            </div>
-            <div class="flex items-center gap-2">
-              <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 border border-gold-500/30 rounded text-gold-400 flex items-center justify-center">-</button>
-              <span class="text-xs text-cream-50">${item.qty}</span>
-              <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 border border-gold-500/30 rounded text-gold-400 flex items-center justify-center">+</button>
-            </div>
-          </div>
-        `).join('');
-      }
+  /* ============================================================
+     NAV / MENU / REVEAL / MISC
+     ============================================================ */
+  function observeReveals(){
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    }), { threshold: .12 });
+    document.querySelectorAll('.reveal:not(.visible)').forEach(x => io.observe(x));
+  }
 
-      const totalAmount = totalCount * PREBOOKING_AMOUNT;
-      document.getElementById('drawer-total-price').textContent = `₹${totalAmount}`;
-      
-      renderCheckoutSummary();
-      bindCursorHovers();
-    }
+  const mmenu = el('mobile-menu');
+  function openMenu(){ mmenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu(){ mmenu.classList.remove('open'); document.body.style.overflow = ''; }
+  el('menu-toggle').onclick = openMenu;
+  el('menu-close').onclick  = closeMenu;
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
 
-    function changeQty(id, delta) {
-      const item = cart.find(i => i.id === id);
-      if(item) {
-        item.qty += delta;
-        if(item.qty <= 0) cart = cart.filter(i => i.id !== id);
-      }
-      updateCartUI();
-    }
+  window.addEventListener('scroll', () => {
+    el('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive:true });
 
-    function toggleCartDrawer() {
-      const panel = document.getElementById('cart-panel');
-      const backdrop = document.getElementById('cart-backdrop');
-      const drawer = document.getElementById('cart-drawer');
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape'){ closeProduct(); closeCart(); toggleGuide(false); }
+  });
 
-      if(panel.classList.contains('translate-x-full')) {
-        drawer.classList.remove('pointer-events-none');
-        panel.classList.remove('translate-x-full');
-        backdrop.classList.remove('opacity-0');
-      } else {
-        panel.classList.add('translate-x-full');
-        backdrop.classList.add('opacity-0');
-        setTimeout(() => drawer.classList.add('pointer-events-none'), 300);
-      }
-    }
+  el('news-form').addEventListener('submit', e => {
+    e.preventDefault();
+    if (!el('news-email').value.trim()) return toast('Please enter your email', 'error');
+    toast('Welcome to the parampara 🌸', 'ok');
+    e.target.reset();
+  });
 
-    // --- 6. CHECKOUT SUMMARY & ORDER PLACEMENT ---
-    function renderCheckoutSummary() {
-      const container = document.getElementById('checkout-cart-items');
-      if(!container) return;
+  /* ============================================================
+     SCENT GUIDE CHAT
+     ============================================================ */
+  const msgs = el('guide-msgs');
+  let guideStarted = false, lastPick = 0;
 
-      if(cart.length === 0) {
-        container.innerHTML = `<p class="text-xs text-cream-100/40 py-4">No items selected. Add products from the catalog.</p>`;
-      } else {
-        container.innerHTML = cart.map(item => `
-          <div class="flex justify-between items-center py-3 text-xs">
-            <div>
-              <p class="font-semibold text-cream-50">${item.name} <span class="text-cream-100/40 font-normal">(${item.size})</span></p>
-              <p class="text-cream-100/40">Qty: ${item.qty} × ₹200</p>
-            </div>
-            <span class="font-bold text-gold-400">₹${200 * item.qty}</span>
-          </div>
-        `).join('');
-      }
+  const MOODS = [
+    { icon:'lucide:flower',   t:'Romantic & Floral', s:'Rose · Jasmine',   pick:0 },
+    { icon:'lucide:sun',      t:'Warm & Woody',      s:'Sandal · Amber',   pick:1 },
+    { icon:'lucide:droplets', t:'Fresh & Green',     s:'Vetiver · Kewra',  pick:2 },
+    { icon:'lucide:sparkles', t:'Bold & Oriental',   s:'Oud · Saffron',    pick:3 }
+  ];
+  const MATCH = [96, 94, 92, 95];
 
-      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-      const prebookingTotal = totalCount * PREBOOKING_AMOUNT;
-      document.getElementById('summary-total').textContent = `₹${prebookingTotal}`;
-    }
+  const TXT_WELCOME = `Namaste! 🙏 I'm <b>Suvā</b>, your personal scent guide. Tell me one little thing and I'll match you with your attar.`;
+  const TXT_MOODS   = `What mood are you drawn to today?`;
+  const TXT_WHATIS  = `Attar (itr) is a natural perfume oil — no alcohol, no synthetics. Flowers, woods and spices are hydro-distilled over a sandalwood base, so a tiny drop lasts 8+ hours. It's India's oldest fine-perfume tradition. 🌿`;
+  const TXT_SHIP    = `We ship across India 🇮🇳 — flat ₹99 shipping on every order. Delivery usually takes 3–6 working days, carefully sealed &amp; packed. 📦`;
+  const TXT_PRICE   = `Our attars come in 4 sizes — 8 / 10 / 12 / 15 ml — priced ₹899 to ₹1,999 depending on the attar. Every bottle includes a premium crystal decanter box. 🧴✨`;
+  const TXT_HUMAN   = `Of course! Our family team replies personally on WhatsApp — usually within minutes between 10am–7pm IST.`;
+  const TXT_FALL    = `I want to get this right for you 🌸 Do you lean towards <b>floral</b>, <b>woody</b>, <b>fresh</b> or <b>bold</b> scents? Or tap a mood above and I'll match you.`;
 
-    function submitOrder() {
-      const name = document.getElementById('cust-name').value.trim();
-      const phone = document.getElementById('cust-phone').value.trim();
-      const address = document.getElementById('cust-address').value.trim();
-      const notes = document.getElementById('cust-notes').value.trim();
+  const scrollGuide = () => { msgs.scrollTop = msgs.scrollHeight; };
 
-      if(!name || !phone || !address) {
-        showToast('Please fill in required delivery fields', 'error');
-        return;
-      }
-      if(cart.length === 0) {
-        showToast('Your cart is empty', 'error');
-        return;
-      }
+  function addMsg(kind, html){
+    const row = document.createElement('div');
+    row.className = 'g-row ' + kind;
+    if (kind === 'bot') row.innerHTML = '<div class="g-mini">S</div>';
+    const b = document.createElement('div');
+    b.className = 'g-bubble' + (kind === 'bot' ? ' wide' : '');
+    b.innerHTML = html;
+    row.appendChild(b);
+    msgs.appendChild(row);
+    scrollGuide();
+    return b;
+  }
 
-      let orderText = `🫶 *NEW SUVAS PRE-BOOKING ORDER*\n\n👤 *Customer:* ${name}\n📱 *Phone:* ${phone}\n📍 *Address:* ${address}\n`;
-      if(notes) orderText += `📝 *Notes:* ${notes}\n`;
-      orderText += `\n🧴 *Booked Items:*\n`;
+  function botSay(html, delay = 800, after){
+    const row = document.createElement('div');
+    row.className = 'g-row bot';
+    row.innerHTML = '<div class="g-mini">S</div>';
+    const b = document.createElement('div');
+    b.className = 'g-bubble wide typing';
+    b.innerHTML = '<span></span><span></span><span></span>';
+    row.appendChild(b);
+    msgs.appendChild(row);
+    scrollGuide();
+    setTimeout(() => {
+      b.classList.remove('typing');
+      b.innerHTML = html;
+      scrollGuide();
+      if (after) after();
+    }, delay);
+  }
 
-      cart.forEach(item => {
-        orderText += ` • ${item.name} (${item.size}) (x${item.qty})\n`;
-      });
+  function setChips(list){
+    el('guide-chips').innerHTML = list.map(c =>
+      `<button class="guide-chip" onclick="guideChip('${c.replace(/'/g, "\\'")}')">${c}</button>`).join('');
+  }
 
-      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-      const prebookingTotal = totalCount * PREBOOKING_AMOUNT;
-      
-      orderText += `\n💳 *Pre-Booking Amount Paid:* ₹${prebookingTotal}`;
-      orderText += `\n\n📅 *Note:* Final price will be revealed at launch. Your booking is secured!`;
+  const DEFAULT_CHIPS = ['Show me another', 'What is an attar?', 'Shipping & delivery', 'Talk to a human'];
 
-      window.open(`https://wa.me/919044742251?text=${encodeURIComponent(orderText)}`, '_blank');
-      showToast('Redirecting to WhatsApp to confirm booking!');
-    }
-
-    // --- 7. MODALS & TOASTS ---
-    function openModal(id) {
-      selectedModalProductId = id;
-      const p = PRODUCTS.find(item => item.id === id);
-      document.getElementById('modal-img').src = p.img;
-      document.getElementById('modal-category').textContent = `${p.category} | ${p.size}`;
-      document.getElementById('modal-title').textContent = p.name;
-      document.getElementById('modal-price').textContent = `Pre-Booking: ₹200`;
-      document.getElementById('modal-desc').textContent = p.desc;
-
-      document.getElementById('product-modal').classList.remove('hidden');
-      document.getElementById('product-modal').classList.add('flex');
-    }
-
-    function closeModal() {
-      document.getElementById('product-modal').classList.add('hidden');
-      document.getElementById('product-modal').classList.remove('flex');
-    }
-
-    function addToCartFromModal() {
-      if(selectedModalProductId) addToCart(selectedModalProductId);
-      closeModal();
-    }
-
-    function showToast(msg, type = 'success') {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
-      toast.className = `glass-card border border-gold-500/30 rounded-xl px-4 py-3 font-sans text-xs text-cream-50 flex items-center gap-2 shadow-xl animate-bounce`;
-      toast.innerHTML = `<span class="iconify text-gold-400" data-icon="${type === 'success' ? 'lucide:check-circle' : 'lucide:alert-circle'}"></span> ${msg}`;
-      container.appendChild(toast);
-      setTimeout(() => toast.remove(), 2500);
-    }
-
-    // --- 8. AI SCENT FINDER BOT LOGIC ---
-    const botChat = document.getElementById('bot-chat');
-    
-    function toggleBot() {
-      const win = document.getElementById('bot-window');
-      const btn = document.getElementById('bot-button');
-      
-      if(win.classList.contains('hidden')) {
-        win.classList.remove('hidden');
-        win.classList.add('flex');
-        btn.classList.remove('bot-pulse');
-        if(!botActive) {
-          botActive = true;
-          startBotConversation();
-        }
-      } else {
-        win.classList.add('hidden');
-        win.classList.remove('flex');
-      }
-    }
-
-    function addBotMsg(text, options = []) {
-      const div = document.createElement('div');
-      div.className = 'flex flex-col items-start gap-2';
-      div.innerHTML = `
-        <div class="bg-maroon-700/50 border border-gold-500/10 px-3 py-2 rounded-lg text-cream-50/90 max-w-[85%]">
-          ${text}
+  function productCardHTML(i, match){
+    const p = PRODUCTS[i];
+    return `
+    <div class="g-card" data-pi="${i}">
+      <div class="g-top">
+        <div class="g-img">${bottleMedia(12)}</div>
+        <div class="flex-1 min-w-0">
+          <div class="g-cat">${p.family} Attar</div>
+          <div class="g-name">${p.name}</div>
+          <div class="g-match">${match}% match <div><b style="width:${match}%"></b></div></div>
         </div>
-      `;
-      botChat.appendChild(div);
-      
-      if(options.length > 0) {
-        const btnDiv = document.createElement('div');
-        btnDiv.className = 'flex flex-wrap gap-2 mb-3';
-        options.forEach(opt => {
-          const btn = document.createElement('button');
-          btn.className = 'bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs px-3 py-1.5 rounded-full hover:bg-gold-500/20 transition-colors cursor-none';
-          btn.innerText = opt.text;
-          btn.onclick = () => handleBotResponse(opt.value);
-          btnDiv.appendChild(btn);
-        });
-        div.appendChild(btnDiv);
-      }
-      
-      botChat.scrollTop = botChat.scrollHeight;
-      bindCursorHovers();
-    }
+      </div>
+      <p class="g-tip">${p.tip}</p>
+      <div class="g-sizes">
+        ${SIZES.map(s => `<button class="size-chip ${s === 12 ? 'active' : ''}" data-size="${s}" onclick="pickGuideSize(this, ${i})">${s} ml</button>`).join('')}
+      </div>
+      <div class="g-prow">
+        <span class="text-xs font-sans text-cream-100/50">Price</span>
+        <span class="font-sans font-bold text-gold-400" data-price>${fmt(p.prices[12])}</span>
+      </div>
+      <div class="g-btns">
+        <button class="g-btn ghost" onclick="guideAdd(this, ${i})">Add to Cart</button>
+        <button class="g-btn solid" onclick="guideOrder(this, ${i})">Order Now</button>
+      </div>
+    </div>`;
+  }
 
-    function addUserMsg(text) {
-      const div = document.createElement('div');
-      div.className = 'flex justify-end';
-      div.innerHTML = `
-        <div class="bg-gold-500 text-maroon-950 px-3 py-2 rounded-lg font-semibold max-w-[85%]">
-          ${text}
-        </div>
-      `;
-      botChat.appendChild(div);
-      botChat.scrollTop = botChat.scrollHeight;
-    }
+  function recommend(i, match, intro){
+    lastPick = i;
+    setChips(DEFAULT_CHIPS);
+    const mood = MOODS.find(m => m.pick === i);
+    botSay(`${intro || 'A beautiful choice!'} For <b>${mood.t.toLowerCase()}</b> moods, I'd suggest —` + productCardHTML(i, match), 900);
+  }
 
-    function startBotConversation() {
-      botChat.innerHTML = '';
-      setTimeout(() => {
-        addBotMsg("Namaste! 🙏 I'm your Suvas Scent Guide. Let's find your signature fragrance.", []);
-      }, 300);
-      
-      setTimeout(() => {
-        addBotMsg("What type of aura do you want to project?", [
-          { text: '🌸 Floral & Romantic', value: 'Floral' },
-          { text: '🌲 Woody & Earthy', value: 'Woody' },
-          { text: '💨 Musky & Bold', value: 'Musk' },
-          { text: '🍯 Warm & Sweet', value: 'Amber' }
-        ]);
-      }, 1200);
-    }
+  function pickMood(i, btn){
+    const m = MOODS[i];
+    btn.closest('.g-bubble').innerHTML = '<i style="opacity:.6">Noted — finding your match…</i>';
+    addMsg('user', m.t);
+    recommend(m.pick, MATCH[i]);
+  }
 
-    function handleBotResponse(val) {
-      if(val.startsWith('add_')) {
-        const id = parseInt(val.split('_')[1]);
-        addToCart(id);
-        addUserMsg('Yes, add it to my cart!');
+  function pickGuideSize(btn, i){
+    const card = btn.closest('.g-card');
+    card.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    card.querySelector('[data-price]').textContent = fmt(PRODUCTS[i].prices[+btn.dataset.size]);
+    swapBottle(card.querySelector('.g-img'), +btn.dataset.size);
+  }
+  function guideSize(btn){
+    const card = btn.closest('.g-card');
+    const act = card.querySelector('.size-chip.active');
+    return act ? +act.dataset.size : 12;
+  }
+  function guideAdd(btn, i){
+    addToCart(i, guideSize(btn), 1);
+  }
+  function guideOrder(btn, i){
+    const s = guideSize(btn);
+    const p = PRODUCTS[i];
+    openWhatsApp([{ name:p.name, size:s, qty:1, price:p.prices[s] }]);
+  }
+
+  function guideChip(txt){
+    addMsg('user', txt);
+    if (txt === 'Show me another'){
+      const ni = (lastPick + 1) % PRODUCTS.length;
+      recommend(ni, Math.max(72, MATCH[ni] - 6), 'Of course — here\'s another direction:');
+    }
+    else if (txt === 'What is an attar?')    botSay(TXT_WHATIS, 700);
+    else if (txt === 'Shipping & delivery')  botSay(TXT_SHIP, 700);
+    else if (txt === 'Talk to a human')
+      botSay(TXT_HUMAN +
+        `<a class="g-btn solid inline-flex items-center justify-center gap-2 mt-3 no-underline" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Suvas! 🌸 I'd like to talk to your team.")}" target="_blank" rel="noopener" style="display:flex"><span class="iconify w-4 h-4" data-icon="lucide:whatsapp"></span>Chat on WhatsApp</a>`, 700);
+  }
+
+  function guideRespond(t){
+    const s = t.toLowerCase();
+    if (/(rose|jasmine|floral|gift|wife|girlfriend|her\b|soft)/.test(s))          return recommend(0, 96);
+    if (/(sandal|wood|amber|warm|meditat|husband|boyfriend|him\b)/.test(s))       return recommend(1, 94);
+    if (/(fresh|green|vetiver|kewra|clean|daily|office|summer|subtle)/.test(s))   return recommend(2, 92);
+    if (/(oud|smok|bold|oriental|night|party|rich|strong|wedding)/.test(s))       return recommend(3, 95);
+    if (/(price|cost|rate|₹|\brs\b|how much)/.test(s))                            return botSay(TXT_PRICE, 700);
+    if (/(ship|deliver|courier|days|tracking)/.test(s))                           return botSay(TXT_SHIP, 700);
+    if (/(attar|what is|difference|alcohol|natural|organic)/.test(s))             return botSay(TXT_WHATIS, 700);
+    if (/(human|agent|call|talk|owner|contact|support|help me)/.test(s))
+      return botSay(TXT_HUMAN +
+        `<a class="g-btn solid inline-flex items-center justify-center gap-2 mt-3 no-underline" href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" style="display:flex"><span class="iconify w-4 h-4" data-icon="lucide:whatsapp"></span>Chat on WhatsApp</a>`, 700);
+    return botSay(TXT_FALL, 800);
+  }
+
+  el('guide-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const inp = el('guide-input');
+    const v = inp.value.trim();
+    if (!v) return;
+    inp.value = '';
+    addMsg('user', v);
+    guideRespond(v);
+  });
+  el('guide-input').addEventListener('input', e => {
+    el('guide-send').classList.toggle('ready', !!e.target.value.trim());
+  });
+
+  function toggleGuide(open){
+    el('guide-panel').classList.toggle('open', open);
+    document.body.classList.toggle('guide-open', open);
+    if (open){
+      try { localStorage.setItem('suvas_guide_seen', '1'); } catch(e){}
+      el('guide-nudge').classList.remove('show');
+      if (window.matchMedia('(min-width:640px)').matches) el('guide-input').focus();
+      if (!guideStarted){
+        guideStarted = true;
+        setTimeout(() => botSay(TXT_WELCOME, 500), 300);
         setTimeout(() => {
-          addBotMsg("Wonderful! ✨ It has been added to your pre-booking cart. You can proceed to checkout whenever you're ready. Need another recommendation?", [
-            { text: 'Find Another Scent', value: 'restart' },
-            { text: 'Close Chat', value: 'close' }
-          ]);
-        }, 800);
-        return;
+          botSay(TXT_MOODS, 600, () => {
+            addMsg('bot', `<div class="g-moods">${MOODS.map((m, ix) =>
+              `<button class="g-mood" onclick="pickMood(${ix}, this)">
+                 <span class="g-mi"><span class="iconify w-4 h-4" data-icon="${m.icon}"></span></span>
+                 <b>${m.t}</b><small>${m.s}</small>
+               </button>`).join('')}</div>`);
+          });
+        }, 1500);
       }
-      
-      if(val === 'close') {
-        toggleBot();
-        return;
-      }
-
-      if(val === 'restart') {
-        startBotConversation();
-        return;
-      }
-      
-      const product = PRODUCTS.find(p => p.category === val);
-      if(!product) return;
-      
-      addUserMsg(val);
-      
-      setTimeout(() => {
-        addBotMsg(`Excellent choice! Based on your preference, your signature scent is <b class="text-gold-400">${product.name}</b> (${product.size}).<br><br><i>${product.desc}</i><br><br>Reserve it now for just <b class="text-gold-400">₹200</b>! (Final price revealed at launch)`, [
-          { text: `Add ${product.name} to Cart`, value: 'add_' + product.id },
-          { text: 'Start Over', value: 'restart' }
-        ]);
-      }, 800);
     }
+  }
 
-    // Initialize Catalog
-    renderProducts(PRODUCTS);
+  setTimeout(() => {
+    try {
+      if (localStorage.getItem('suvas_guide_seen') || sessionStorage.getItem('suvas_nudge_done')) return;
+      sessionStorage.setItem('suvas_nudge_done', '1');
+    } catch(e){}
+    const n = el('guide-nudge');
+    n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), 9000);
+  }, 4000);
+
+  /* ============================================================
+     INIT
+     ============================================================ */
+  (function init(){
+    renderGrid();
+    renderCart();
+    observeReveals();
+    el('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('.hero-dot').forEach((d, i) =>
+      d.addEventListener('click', () => { goSlide(i); resetHeroTimer(); }));
+    restartProgress();
+    resetHeroTimer();
+  })();
   </script>
 </body>
 </html>
